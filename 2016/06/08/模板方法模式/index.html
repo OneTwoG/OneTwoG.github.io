@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+       | 会飞的僵尸 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="会飞的僵尸">
+    
+    
+
+    <meta name="description" content="title: 设计模式  ask大叔控记得拉上
+模板方法模式（Builder）模式的定义定义一个操作中的算法的框架，而将一些步骤延时到子类中。使得子类可以不改变一个算法的结构即可以重定义该算法的某些特定步骤。  
+使用场景
+多个子类有公有的方法，并且逻辑基本相同时。
+重要、复杂的算法，可以把核心算法设计为模板方法，，周边的相关细节功能则由各个子类实现。
+重构时，模板方法模式是一个经常使用的模式，把">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" | 会飞的僵尸">
+<meta property="og:url" content="http://ytwnoone.xyz/2016/06/08/模板方法模式/index.html">
+<meta property="og:site_name" content="会飞的僵尸">
+<meta property="og:description" content="title: 设计模式  ask大叔控记得拉上
+模板方法模式（Builder）模式的定义定义一个操作中的算法的框架，而将一些步骤延时到子类中。使得子类可以不改变一个算法的结构即可以重定义该算法的某些特定步骤。  
+使用场景
+多个子类有公有的方法，并且逻辑基本相同时。
+重要、复杂的算法，可以把核心算法设计为模板方法，，周边的相关细节功能则由各个子类实现。
+重构时，模板方法模式是一个经常使用的模式，把">
+<meta property="og:image" content="http://139.129.39.66/blog/fangfamoshi.png">
+<meta property="og:updated_time" content="2016-06-08T16:13:47.900Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" | 会飞的僵尸">
+<meta name="twitter:description" content="title: 设计模式  ask大叔控记得拉上
+模板方法模式（Builder）模式的定义定义一个操作中的算法的框架，而将一些步骤延时到子类中。使得子类可以不改变一个算法的结构即可以重定义该算法的某些特定步骤。  
+使用场景
+多个子类有公有的方法，并且逻辑基本相同时。
+重要、复杂的算法，可以把核心算法设计为模板方法，，周边的相关细节功能则由各个子类实现。
+重构时，模板方法模式是一个经常使用的模式，把">
+<meta name="twitter:image" content="http://139.129.39.66/blog/fangfamoshi.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">会飞的僵尸</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          程序员改变世界，用代码分享快乐
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about/" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title"></h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-06-08" class="post-meta__date date">2016-06-08</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h2 id="title-设计模式"><a href="#title-设计模式" class="headerlink" title="title: 设计模式"></a>title: 设计模式</h2><p>  ask大叔控记得拉上</p>
+<h2 id="模板方法模式（Builder）"><a href="#模板方法模式（Builder）" class="headerlink" title="模板方法模式（Builder）"></a><strong>模板方法模式（Builder）</strong></h2><h3 id="模式的定义"><a href="#模式的定义" class="headerlink" title="模式的定义"></a><strong>模式的定义</strong></h3><p>定义一个操作中的算法的框架，而将一些步骤延时到子类中。使得子类可以不改变一个算法的结构即可以重定义该算法的某些特定步骤。  </p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a><strong>使用场景</strong></h3><ul>
+<li>多个子类有公有的方法，并且逻辑基本相同时。</li>
+<li>重要、复杂的算法，可以把核心算法设计为模板方法，，周边的相关细节功能则由各个子类实现。</li>
+<li>重构时，模板方法模式是一个经常使用的模式，把相同的代码抽取到父类中，然后通过子函数约束其行为。  </li>
+</ul>
+<h3 id="模式简单实现"><a href="#模式简单实现" class="headerlink" title="模式简单实现"></a><strong>模式简单实现</strong></h3><p>模板方法实际上是封装一个算法框架，就像是一套模板一样。而子类可以有不同的算法实现，在架构不被修改的情况下实现算法的替换。下面我们以开电脑这个动作来简单演示一下模板方法，开电脑的整过过程都是相对稳定的，首先打开电脑电源，电脑检测自身状态没有问题时将进入操作系统，对用户进行验证之后即可登录，下面我们使用模板方法来模拟一下这个过程。  </p>
+<h3 id="实现源码"><a href="#实现源码" class="headerlink" title="实现源码"></a><strong>实现源码</strong></h3><pre><code>
+/**
+ * 抽象的Computer
+ * @author T
+ *
+ */
+public class AbstractComputer {
+
+    protected void powerOn(){
+        System.out.println(&quot;开启电源&quot;);
+    }
+
+    protected void checkHardware(){
+        System.out.println(&quot;硬件检查&quot;);
+    }
+
+    protected void loadOS(){
+        System.out.println(&quot;载入操作系统&quot;);
+    }
+
+    protected void login(){
+        System.out.println(&quot;小白的电脑无验证，直接进入系统&quot;);
+    }
+
+    /**
+     * 启动电脑方法，步骤固定为开启电源，系统检查，加载操作系统，用户登录。该方法为final，防止算法被串改
+     */
+    public final void startUp(){
+        System.out.println(&quot;-----开机-----&quot;);
+        powerOn();
+        checkHardware();
+        loadOS();
+        login();
+        System.out.println(&quot;-----开机  END-----&quot;);
+    }
+}
+
+
+/**
+ * 码农的计算机
+ * @author T
+ *
+ */
+public class CoderComputer extends AbstractComputer {
+
+    @Override
+    protected void login() {
+        System.out.println(&quot;码农只需要进行用户和密码验证就可以了&quot;);
+    }
+}
+
+/**
+ * 军用计算机
+ * @author T
+ *
+ */
+public class MilitaryComputer extends AbstractComputer{
+
+    @Override
+    protected void checkHardware() {
+        // TODO Auto-generated method stub
+        super.checkHardware();
+        System.out.println(&quot;检查硬件防火墙&quot;);
+    }
+
+    @Override
+    protected void login() {
+        // TODO Auto-generated method stub
+        super.login();
+        System.out.println(&quot;进行指纹识别等复杂的用户验证&quot;);
+    }
+}
+
+import com.sun.org.apache.bcel.internal.classfile.Code;
+
+public class Test {
+    public static void main(String[] args) {
+        AbstractComputer comp = new CoderComputer();
+        comp.startUp();
+
+        comp = new MilitaryComputer();
+        comp.startUp();
+    }
+}
+</code></pre><p>输出结果如图<br><img src="http://139.129.39.66/blog/fangfamoshi.png" alt="result"><br>通过上面的例子可以看到，在startUp方法中有一些固定的步骤，一次为开启电源、检查硬件、加载系统、用户登录四个步骤，这四个步骤是电脑开机过程中不会变动的四个过程。但是不同用户的这几个步骤的实现可能各不相同，因此他们可以用不同的实现。而startUp为final方法，即办证了算法框架不能修改，具体算法实现却可以灵活改变。startUp中的这几个算法步骤可以称为是一个套路，即可以称为模板方法。因此，模板方法是定义一个操作中的算法框架，而将一些步骤延迟到子类中。使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。  </p>
+<h3 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a><strong>优点与缺点</strong></h3><p><strong>优点</strong>  </p>
+<ul>
+<li>封装不变部分，扩展可变部分</li>
+<li>提取公共部分代码，便可维护  </li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>模板方法会带来代码阅读的难度，会让新手觉得难以理解</li>
+</ul>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2016. | by<a href="http://ytwnoone.xyz">会飞的僵尸</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

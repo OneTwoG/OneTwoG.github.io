@@ -1,9 +1,9 @@
 .archive-meta h3 {
-    line-height: 2.0;
+    line-height: 1.0;
 }
 
 .archive-meta sup {
-    font-size: 10px;
+    font-size: 8px;
     -moz-border-radius: 5px; 
     -webkit-border-radius: 5px; 
     border-radius: 5px;
@@ -12,7 +12,7 @@
 }
 
 .archive-meta span {
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .archive-meta .archive-list-count::before {

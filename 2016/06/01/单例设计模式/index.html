@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      Android中的设计模式1 | 会飞的僵尸 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="会飞的僵尸">
+    
+    
+
+    <meta name="description" content="设计模式代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式已经成为开发人员最重要的技能之一，他们能够让你优雅的、简单、灵活的解决开发中遇到的设计难题，让你的软件系统具有更好的可扩展性、灵活性，在特定场景之下让你的软件系统实现拥抱变化。
+单例模式单例模式定义确保某一个类中只有一个实例，而且自行实例化并向整个系统提供这个实例。  
+模式使用场景确保某个类有且只有一个对象的场景，例如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android中的设计模式1 | 会飞的僵尸">
+<meta property="og:url" content="http://ytwnoone.xyz/2016/06/01/单例设计模式/index.html">
+<meta property="og:site_name" content="会飞的僵尸">
+<meta property="og:description" content="设计模式代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式已经成为开发人员最重要的技能之一，他们能够让你优雅的、简单、灵活的解决开发中遇到的设计难题，让你的软件系统具有更好的可扩展性、灵活性，在特定场景之下让你的软件系统实现拥抱变化。
+单例模式单例模式定义确保某一个类中只有一个实例，而且自行实例化并向整个系统提供这个实例。  
+模式使用场景确保某个类有且只有一个对象的场景，例如">
+<meta property="og:image" content="http://139.129.39.66/blog/danlimoshi.png">
+<meta property="og:updated_time" content="2016-06-08T15:58:55.805Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android中的设计模式1 | 会飞的僵尸">
+<meta name="twitter:description" content="设计模式代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式已经成为开发人员最重要的技能之一，他们能够让你优雅的、简单、灵活的解决开发中遇到的设计难题，让你的软件系统具有更好的可扩展性、灵活性，在特定场景之下让你的软件系统实现拥抱变化。
+单例模式单例模式定义确保某一个类中只有一个实例，而且自行实例化并向整个系统提供这个实例。  
+模式使用场景确保某个类有且只有一个对象的场景，例如">
+<meta name="twitter:image" content="http://139.129.39.66/blog/danlimoshi.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">会飞的僵尸</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          程序员改变世界，用代码分享快乐
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about/" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Android中的设计模式1</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-06-01" class="post-meta__date date">2016-06-01</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Android/">Android</a>
+            </font>
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>设计模式代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式已经成为开发人员最重要的技能之一，他们能够让你优雅的、简单、灵活的解决开发中遇到的设计难题，让你的软件系统具有更好的可扩展性、灵活性，在特定场景之下让你的软件系统实现拥抱变化。</p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><h3 id="单例模式定义"><a href="#单例模式定义" class="headerlink" title="单例模式定义"></a>单例模式定义</h3><p>确保某一个类中只有一个实例，而且自行实例化并向整个系统提供这个实例。  </p>
+<h3 id="模式使用场景"><a href="#模式使用场景" class="headerlink" title="模式使用场景"></a>模式使用场景</h3><p>确保某个类有且只有一个对象的场景，例如创建一个对象需要消耗的资源过多，如要访问IO和数据库等资源。  </p>
+<h3 id="模式的简单实现"><a href="#模式的简单实现" class="headerlink" title="模式的简单实现"></a>模式的简单实现</h3><p>单例模式是设计模式中最简单的，只有一个单例类，没有其他的层次结构与抽象。该模式需要确保该类只能生成一个对象，通常是该类需要消耗太多的资源或者没有多个实例的理由。例如一个公司只有一个CEO,一台电脑电脑通常只有一个键盘等。下面我们以公司里的CEO为例来简单演示，一个公司可以有几个VP，无数个员工，但是CEO只有一个，请看下面实例。  </p>
+<h3 id="实现源码"><a href="#实现源码" class="headerlink" title="实现源码"></a>实现源码</h3><pre><code>
+/**
+ * 人的基类
+ */
+public abstract class Person {
+    public abstract void talk();
+}
+
+/**
+ * 普通员工
+ */
+public class Staff extends Person{
+
+    @Override
+    public void talk() {
+
+    }
+}
+
+/**
+ * 副总裁
+ */
+public class VP extends Person{
+
+    @Override
+    public void talk() {
+
+    }
+}
+
+public class CEO extends Person{
+    private static final CEO mCeo = new CEO();
+
+    private CEO(){
+    }
+
+    public static CEO getCeo(){
+        return mCeo;
+    }
+
+    @Override
+    public void talk() {
+        System.out.println(&quot;CEO发表讲话&quot;);
+    }
+}
+
+/**
+ * 公司类
+ */
+public class Company{
+    private List&lt;Person&gt; allPerson = new ArrayList&lt;Person&gt;();
+
+    public void addStaff(Person person){
+        allPerson.add(person);
+    }
+
+    public void showALLStaffs(){
+        for (Person per : allPerson){
+            System.out.println(&quot;Obj:&quot; + per.toString());
+        }
+    }
+}
+
+public class Test{
+    public static void main(String[] args){
+        Company cp = new Company();
+        Person ceo1 = CEO.getCeo();
+        Person ceo2 = CEO.getCeo();
+        cp.addStaff(ceo1);
+        cp.addStaff(ceo2);
+
+        Person vp1 = new VP();
+        Person vp2 = new VP();
+
+        Person staff1 = new Staff();
+        Person staff2 = new Staff();
+        Person staff3 = new Staff();
+
+        cp.addStaff(vp1);
+        cp.addStaff(vp2);
+        cp.addStaff(staff1);
+        cp.addStaff(staff2);
+        cp.addStaff(staff3);
+
+        cp.showALLStaffs();
+    }
+}
+</code></pre><p>输出结果如图<br><img src="http://139.129.39.66/blog/danlimoshi.png" alt="显示结果">  </p>
+<p>可以看到，CEO两次输出的CEO对象的文字描述都是一样的，而VP、Staff类的对象都是不同的。即CEO是唯一的实例，而其他类型都是不同的实例。这个实现的核心在于将CEO类的构造方法私有化，使得外部程序不能通过构造函数来构造CEO对象，而CEO类通过一个静态方法返回一个唯一的对象。  </p>
+<h3 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h3><p><strong>优点</strong>  </p>
+<ul>
+<li>由于单例模式在内存中只有一个实例，减少了内存开支，特别是一个对象需要频繁地创建、销毁时，而且创建或销毁时性能又无法优化，单例模式的优势就非常明显  </li>
+<li>由于单例模式只生成一个实例，所以减少了系统的性能开销，当一个对象的产生需要比较多的资源时，如读取配置、产生其他依赖对象时，则可以通过在应用启动时直接产生一个单例对象，然后用永久驻留内存的方式来解决；</li>
+<li>单例模式可以避免对资源的多重占用，例如一个写文件动作，由于只有一个实例存在内存中，避免对同一个资源文件的同时写操作。</li>
+<li>单例模式可以在系统设置全局的访问点，优化和共享资源访问，例如可以设计一个单例类，负责所有数据表的映射处理</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>单例模式一般没有接口，扩展很困难，若要扩展，除了修改代码基本上没有第二种途径可以实现。</li>
+</ul>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2016. | by<a href="http://ytwnoone.xyz">会飞的僵尸</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
