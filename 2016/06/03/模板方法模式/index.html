@@ -7,7 +7,7 @@
     
 
     <title>
-       | 会飞的僵尸 
+      Android中的设计模式2 | 会飞的僵尸 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,32 +16,29 @@
     
     
 
-    <meta name="description" content="title: 设计模式  ask大叔控记得拉上
-模板方法模式（Builder）模式的定义定义一个操作中的算法的框架，而将一些步骤延时到子类中。使得子类可以不改变一个算法的结构即可以重定义该算法的某些特定步骤。  
+    <meta name="description" content="模板方法模式（Builder）模式的定义定义一个操作中的算法的框架，而将一些步骤延时到子类中。使得子类可以不改变一个算法的结构即可以重定义该算法的某些特定步骤。  
 使用场景
 多个子类有公有的方法，并且逻辑基本相同时。
 重要、复杂的算法，可以把核心算法设计为模板方法，，周边的相关细节功能则由各个子类实现。
-重构时，模板方法模式是一个经常使用的模式，把">
+重构时，模板方法模式是一个经常使用的模式，把相同的代码抽取到父类中，然后通过子函数约束其行为">
 <meta property="og:type" content="article">
-<meta property="og:title" content=" | 会飞的僵尸">
-<meta property="og:url" content="http://ytwnoone.xyz/2016/06/08/模板方法模式/index.html">
+<meta property="og:title" content="Android中的设计模式2 | 会飞的僵尸">
+<meta property="og:url" content="http://ytwnoone.xyz/2016/06/03/模板方法模式/index.html">
 <meta property="og:site_name" content="会飞的僵尸">
-<meta property="og:description" content="title: 设计模式  ask大叔控记得拉上
-模板方法模式（Builder）模式的定义定义一个操作中的算法的框架，而将一些步骤延时到子类中。使得子类可以不改变一个算法的结构即可以重定义该算法的某些特定步骤。  
+<meta property="og:description" content="模板方法模式（Builder）模式的定义定义一个操作中的算法的框架，而将一些步骤延时到子类中。使得子类可以不改变一个算法的结构即可以重定义该算法的某些特定步骤。  
 使用场景
 多个子类有公有的方法，并且逻辑基本相同时。
 重要、复杂的算法，可以把核心算法设计为模板方法，，周边的相关细节功能则由各个子类实现。
-重构时，模板方法模式是一个经常使用的模式，把">
+重构时，模板方法模式是一个经常使用的模式，把相同的代码抽取到父类中，然后通过子函数约束其行为">
 <meta property="og:image" content="http://139.129.39.66/blog/fangfamoshi.png">
-<meta property="og:updated_time" content="2016-06-08T16:13:47.900Z">
+<meta property="og:updated_time" content="2016-06-08T16:18:02.941Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" | 会飞的僵尸">
-<meta name="twitter:description" content="title: 设计模式  ask大叔控记得拉上
-模板方法模式（Builder）模式的定义定义一个操作中的算法的框架，而将一些步骤延时到子类中。使得子类可以不改变一个算法的结构即可以重定义该算法的某些特定步骤。  
+<meta name="twitter:title" content="Android中的设计模式2 | 会飞的僵尸">
+<meta name="twitter:description" content="模板方法模式（Builder）模式的定义定义一个操作中的算法的框架，而将一些步骤延时到子类中。使得子类可以不改变一个算法的结构即可以重定义该算法的某些特定步骤。  
 使用场景
 多个子类有公有的方法，并且逻辑基本相同时。
 重要、复杂的算法，可以把核心算法设计为模板方法，，周边的相关细节功能则由各个子类实现。
-重构时，模板方法模式是一个经常使用的模式，把">
+重构时，模板方法模式是一个经常使用的模式，把相同的代码抽取到父类中，然后通过子函数约束其行为">
 <meta name="twitter:image" content="http://139.129.39.66/blog/fangfamoshi.png">
     
     
@@ -171,15 +168,20 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title"></h1>
+    <h1 class="post-title">Android中的设计模式2</h1>
 
     
 
     <div class="post-meta">
-      <time datetime="2016-06-08" class="post-meta__date date">2016-06-08</time> 
+      <time datetime="2016-06-03" class="post-meta__date date">2016-06-03</time> 
 
       <span class="post-meta__tags tags">
 
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Android/">Android</a>
+            </font>
           
 
           
@@ -192,8 +194,7 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <h2 id="title-设计模式"><a href="#title-设计模式" class="headerlink" title="title: 设计模式"></a>title: 设计模式</h2><p>  ask大叔控记得拉上</p>
-<h2 id="模板方法模式（Builder）"><a href="#模板方法模式（Builder）" class="headerlink" title="模板方法模式（Builder）"></a><strong>模板方法模式（Builder）</strong></h2><h3 id="模式的定义"><a href="#模式的定义" class="headerlink" title="模式的定义"></a><strong>模式的定义</strong></h3><p>定义一个操作中的算法的框架，而将一些步骤延时到子类中。使得子类可以不改变一个算法的结构即可以重定义该算法的某些特定步骤。  </p>
+    <h2 id="模板方法模式（Builder）"><a href="#模板方法模式（Builder）" class="headerlink" title="模板方法模式（Builder）"></a><strong>模板方法模式（Builder）</strong></h2><h3 id="模式的定义"><a href="#模式的定义" class="headerlink" title="模式的定义"></a><strong>模式的定义</strong></h3><p>定义一个操作中的算法的框架，而将一些步骤延时到子类中。使得子类可以不改变一个算法的结构即可以重定义该算法的某些特定步骤。  </p>
 <h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a><strong>使用场景</strong></h3><ul>
 <li>多个子类有公有的方法，并且逻辑基本相同时。</li>
 <li>重要、复杂的算法，可以把核心算法设计为模板方法，，周边的相关细节功能则由各个子类实现。</li>
