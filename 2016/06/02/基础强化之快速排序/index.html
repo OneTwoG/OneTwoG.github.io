@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      快速排序 | 会飞的僵尸 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="会飞的僵尸">
+    
+    
+
+    <meta name="description" content="快速排序基本思想：从需要排序的数组中选择其中一个作为基准元素（一般选择第一个或者最后一个）,然后利用基准元素对数组中的元素进行对比，通过这次比较可以将数组划分成两部分，第一部分是比基准元素小的（在基准元素左边），第二部分是比基准元素大的（在基准元素的右边）。此时基准元素就在这两部分之间。一次类推，再对分出来的这两部分进行递归各划分。  
+选取74为基准元素  
+实例代码  
+public clas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速排序 | 会飞的僵尸">
+<meta property="og:url" content="http://ytwnoone.xyz/2016/06/02/基础强化之快速排序/index.html">
+<meta property="og:site_name" content="会飞的僵尸">
+<meta property="og:description" content="快速排序基本思想：从需要排序的数组中选择其中一个作为基准元素（一般选择第一个或者最后一个）,然后利用基准元素对数组中的元素进行对比，通过这次比较可以将数组划分成两部分，第一部分是比基准元素小的（在基准元素左边），第二部分是比基准元素大的（在基准元素的右边）。此时基准元素就在这两部分之间。一次类推，再对分出来的这两部分进行递归各划分。  
+选取74为基准元素  
+实例代码  
+public clas">
+<meta property="og:image" content="http://139.129.39.66/blog/QuickSort.png">
+<meta property="og:updated_time" content="2016-06-11T16:11:40.236Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="快速排序 | 会飞的僵尸">
+<meta name="twitter:description" content="快速排序基本思想：从需要排序的数组中选择其中一个作为基准元素（一般选择第一个或者最后一个）,然后利用基准元素对数组中的元素进行对比，通过这次比较可以将数组划分成两部分，第一部分是比基准元素小的（在基准元素左边），第二部分是比基准元素大的（在基准元素的右边）。此时基准元素就在这两部分之间。一次类推，再对分出来的这两部分进行递归各划分。  
+选取74为基准元素  
+实例代码  
+public clas">
+<meta name="twitter:image" content="http://139.129.39.66/blog/QuickSort.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">会飞的僵尸</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          程序员改变世界，用代码分享快乐
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about/" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">快速排序</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-06-02" class="post-meta__date date">2016-06-02</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/排序算法/">排序算法</a>
+            </font>
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>快速排序基本思想：从需要排序的数组中选择其中一个作为基准元素（一般选择第一个或者最后一个）,然后利用基准元素对数组中的元素进行对比，通过这次比较可以将数组划分成两部分，第一部分是比基准元素小的（在基准元素左边），第二部分是比基准元素大的（在基准元素的右边）。此时基准元素就在这两部分之间。一次类推，再对分出来的这两部分进行递归各划分。  </p>
+<p>选取74为基准元素<br><img src="http://139.129.39.66/blog/QuickSort.png" alt="过程演示">  </p>
+<p><strong>实例代码</strong>  </p>
+<pre><code>public class QuickSort{
+public static void main (String[] args){
+    int[] a = {74,24,44,13,85,67,32,90,34,23,55,77};
+
+    System.out.println(&quot;排序之前&quot;);
+
+    for(int i = 0; i &lt; a.length; i++){
+        System.out.print(a[i] + &quot; &quot;);
+    }
+
+    //快速排序
+    quick(a);
+    System.out.println(&quot;排序之后&quot;);
+    for(int i = 0; i &lt; a.length; i++){
+        System.out.print(a[i] + &quot; &quot;);
+    }
+
+}
+
+private static void quick(int[] a){
+    if(a.length &gt; 0){
+        quickSort(a, 0, a.length - 1);
+    }
+}
+
+/**
+*        递归函数
+* int[] a  要进行排序的数组
+* low      用于获取数组中的第一个数
+* high     用户用户数组中的最后一个数 
+**/
+private static void quickSort(int[] a, int low, int high){
+    if(low &lt; high){
+        int middle = getMiddle(a, low, high);            //将数组进行划分，划分的结果如上图 最终结果
+        quickSort(a, 0, middle - 1);        //对划分后的小于基准元素的数字进行排序
+        quickSort(a, middle + 1, high);        //对划分后的大于基准元素的数字进行排序
+    }
+}
+
+private static int getMiddle(int[] a, int low, int high){
+    int temp = a[low];
+    while(low &lt; high){        //用户判断是否结束
+
+
+        //找到比基准元素小的元素位置
+        while(low &lt; high &amp;&amp; a[high] &gt;= temp){        
+            //从数组后面往前面比较，如果大于基准元素就继续进行下一个比较，否则跳出循环
+            high--;
+        }
+        a[low] = a[high];        //跳出上面的循环后将数字进行交换
+
+
+        //找到比基准元素大的元素位置
+        while(low &lt; high &amp;&amp; a[low] &lt;= temp){        
+            //从数组前面往后面比较，如果小于基准元素则继续进行下一个比较，否则跳出循环
+            low++;
+        }
+        a[high] = a[low];        //跳出循环后将数字进行交换
+    }
+    a[low] = temp;                //将基准元素放数组中合适的位置
+    return low;                    //返回基准元素的位置
+}
+</code></pre><p>}</p>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2016. | by<a href="http://ytwnoone.xyz">会飞的僵尸</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
