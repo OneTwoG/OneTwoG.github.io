@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      Cocos2d-x 2048小游戏 | 会飞的僵尸 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="会飞的僵尸">
+    
+    
+
+    <meta name="description" content="通过Cocos2d-x游戏引擎 制作2048小游戏，主要用C++实现开发步骤
+
+创建CardSplite类
+设计主游戏场景GameScene，实现游戏逻辑，添加动画逻辑。
+添加游戏胜利或者游戏失败显示  
+
+主要实现代码
+CardSplit类
+#include &amp;quot;CardSprite.h&amp;quot;
+USING_NS_CC;
+//初始化游戏卡片的方法
+CardSprite* CardSp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2d-x 2048小游戏 | 会飞的僵尸">
+<meta property="og:url" content="http://ytwnoone.xyz/2016/06/10/Cocos2d-x/index.html">
+<meta property="og:site_name" content="会飞的僵尸">
+<meta property="og:description" content="通过Cocos2d-x游戏引擎 制作2048小游戏，主要用C++实现开发步骤
+
+创建CardSplite类
+设计主游戏场景GameScene，实现游戏逻辑，添加动画逻辑。
+添加游戏胜利或者游戏失败显示  
+
+主要实现代码
+CardSplit类
+#include &amp;quot;CardSprite.h&amp;quot;
+USING_NS_CC;
+//初始化游戏卡片的方法
+CardSprite* CardSp">
+<meta property="og:image" content="http://139.129.39.66/blog/2048One.png">
+<meta property="og:image" content="http://139.129.39.66/blog/2048End.png">
+<meta property="og:updated_time" content="2016-06-18T13:57:08.651Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocos2d-x 2048小游戏 | 会飞的僵尸">
+<meta name="twitter:description" content="通过Cocos2d-x游戏引擎 制作2048小游戏，主要用C++实现开发步骤
+
+创建CardSplite类
+设计主游戏场景GameScene，实现游戏逻辑，添加动画逻辑。
+添加游戏胜利或者游戏失败显示  
+
+主要实现代码
+CardSplit类
+#include &amp;quot;CardSprite.h&amp;quot;
+USING_NS_CC;
+//初始化游戏卡片的方法
+CardSprite* CardSp">
+<meta name="twitter:image" content="http://139.129.39.66/blog/2048One.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">会飞的僵尸</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          程序员改变世界，用代码分享快乐
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about/" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Cocos2d-x 2048小游戏</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-06-10" class="post-meta__date date">2016-06-10</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/cocos2d-x/">cocos2d-x</a>
+            </font>
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>通过Cocos2d-x游戏引擎 制作2048小游戏，主要用C++实现<br><strong>开发步骤</strong></p>
+<ul>
+<li>创建CardSplite类</li>
+<li>设计主游戏场景GameScene，实现游戏逻辑，添加动画逻辑。</li>
+<li>添加游戏胜利或者游戏失败显示  </li>
+</ul>
+<p><strong>主要实现代码</strong></p>
+<p><strong>CardSplit类</strong></p>
+<pre><code>#include &quot;CardSprite.h&quot;
+USING_NS_CC;
+//初始化游戏卡片的方法
+CardSprite* CardSprite::createCardSprite(int number, int weight, int height, float CardSpriteX, float CardSpriteY)
+{
+CardSprite *enemy = new CardSprite();
+if (enemy &amp;&amp; enemy-&gt;init())
+{
+    enemy-&gt;autorelease();
+    enemy-&gt;enemyInit(number, weight, height, CardSpriteX, CardSpriteY);
+
+    return enemy;
+}
+
+CC_SAFE_DELETE(enemy);
+return NULL;
+}
+bool CardSprite::init()
+{
+if (!Sprite::init())
+{
+    return false;
+}
+return true;
+}
+
+//设置数字
+void CardSprite::setNumber(int num) {
+number = num;
+
+//判断数字的大小来调整字体的大小
+if (number &gt;= 0)
+{
+    labTTCardNumber-&gt;setFontSize(30);
+}
+if (number &gt;= 16)
+{
+    labTTCardNumber-&gt;setFontSize(30);
+}
+if (number &gt;= 128)
+{
+    labTTCardNumber-&gt;setFontSize(30);
+}
+if (number &gt;= 1024)
+{
+    labTTCardNumber-&gt;setFontSize(25);
+}
+
+//判断数字的大小调整颜色
+if (number == 0)
+{
+    layerCardBG-&gt;setColor(cocos2d::Color3B(222, 184, 135));
+}
+if (number == 2)
+{
+    layerCardBG-&gt;setColor(cocos2d::Color3B(173, 216, 230));
+}
+if (number == 4)
+{
+    layerCardBG-&gt;setColor(cocos2d::Color3B(127, 255, 0));
+}
+if (number == 8)
+{
+    layerCardBG-&gt;setColor(cocos2d::Color3B(34, 139, 34));
+}
+if (number == 16)
+{
+    layerCardBG-&gt;setColor(cocos2d::Color3B(255, 20, 147));
+}
+if (number == 32)
+{
+    layerCardBG-&gt;setColor(cocos2d::Color3B(240, 120, 90));
+}
+if (number == 64)
+{
+    layerCardBG-&gt;setColor(cocos2d::Color3B(240, 90, 60));
+}
+if (number == 128)
+{
+    layerCardBG-&gt;setColor(cocos2d::Color3B(240, 90, 60));
+}
+if (number == 256)
+{
+    layerCardBG-&gt;setColor(cocos2d::Color3B(240, 200, 70));
+}
+if (number == 512)
+{
+    layerCardBG-&gt;setColor(cocos2d::Color3B(240, 200, 70));
+}
+if (number == 1024)
+{
+    layerCardBG-&gt;setColor(cocos2d::Color3B(0, 130, 0));
+}
+if (number == 2048)
+{
+    layerCardBG-&gt;setColor(cocos2d::Color3B(0, 130, 0));
+}
+
+//更新显示数字,
+if (number &gt; 0)
+{
+    labTTCardNumber-&gt;setString(__String::createWithFormat(&quot;%i&quot;, number)-&gt;getCString());
+}
+else
+{
+    labTTCardNumber-&gt;setString(&quot;&quot;);
+}
+}
+
+//获取数字
+int CardSprite::getNumber() {
+return number;
+}
+
+void CardSprite::enemyInit(int numbers, int weight, int height, float CardSpriteX, float CardSpriteY) {
+//初始化数字
+number = numbers;
+
+//加入卡片的背景颜色
+layerCardBG = cocos2d::LayerColor::create(cocos2d::Color4B(200, 190, 280, 255), weight - 15, height - 15);
+//设置位置
+layerCardBG-&gt;setPosition(Point(CardSpriteX, CardSpriteY));
+
+//判断如果不等于0 就显示，否则为空
+if (number &gt; 0)
+{
+    //加入中间字体
+    labTTCardNumber = cocos2d::LabelTTF::create(__String::createWithFormat(&quot;%i&quot;, number)-&gt;getCString(), &quot;hirakakuProN-w6&quot;, 100);
+    //将字体设置到颜色块的正中间
+    labTTCardNumber-&gt;setPosition(Point(layerCardBG-&gt;getContentSize().width / 2, layerCardBG-&gt;getContentSize().height / 2));
+
+    layerCardBG-&gt;addChild(labTTCardNumber);
+}
+else
+{
+    //加入中间字体
+    labTTCardNumber = cocos2d::LabelTTF::create(&quot;&quot;, &quot;hirakakuProN-w6&quot;, 100);
+    //将字体设置到颜色块的正中间
+    labTTCardNumber-&gt;setPosition(Point(layerCardBG-&gt;getContentSize().width / 2, layerCardBG-&gt;getContentSize().height / 2));
+
+    layerCardBG-&gt;addChild(labTTCardNumber);
+}
+
+//加入背景
+ this-&gt;addChild(layerCardBG);
+}
+//获得卡片层
+LayerColor* CardSprite::getCardLayer()
+{
+     return layerCardBG;
+}
+</code></pre><p><strong>HelloWorld类</strong></p>
+<pre><code>#include &quot;HelloWorldScene.h&quot;
+#include &quot;CardSprite.h&quot;
+
+USING_NS_CC;
+
+Scene* HelloWorld::createScene()
+{
+    auto scene = Scene::create();
+    auto layer = HelloWorld::create();
+    scene-&gt;addChild(layer);
+
+    return scene;
+}
+
+// on &quot;init&quot; you need to initialize your instance
+bool HelloWorld::init()
+{
+if (!Layer::init())
+{
+    return false;
+}
+
+//分数初始化
+score = 0;
+
+Size visibleSize = Director::getInstance()-&gt;getVisibleSize();
+Vec2 origin = Director::getInstance()-&gt;getVisibleOrigin();
+
+//加入游戏背景
+auto layerColorBG = cocos2d::LayerColor::create(cocos2d::Color4B(180, 170, 160, 255));
+this-&gt;addChild(layerColorBG);
+
+//加入游戏标题  
+auto title = LabelTTF::create(&quot;2048&quot;, &quot;Arial&quot;, 60);
+title-&gt;setColor(Color3B(255, 255, 153));
+title-&gt;setPosition(Point(visibleSize.width / 2, visibleSize.height - 50));
+addChild(title);
+
+//加入restart按钮  
+restartBtn = LabelTTF::create(&quot;Restart&quot;, &quot;Arial&quot;, 20);
+restartBtn-&gt;setColor(Color3B(204, 255, 253));
+restartBtn-&gt;setPosition(Point(visibleSize.width / 2, visibleSize.height - 110));
+this-&gt;addChild(restartBtn);
+
+//给restartBtn设置事件监听器
+auto listener = EventListenerTouchOneByOne::create();
+listener-&gt;onTouchBegan = [](Touch *t, Event *e)
+{
+    if (e-&gt;getCurrentTarget()-&gt;getBoundingBox().containsPoint(t-&gt;getLocation()))
+    {
+        Director::getInstance()-&gt;replaceScene(TransitionFade::create(1, HelloWorld::createScene()));
+    }
+    return false;
+};
+Director::getInstance()-&gt;getEventDispatcher()-&gt;addEventListenerWithSceneGraphPriority(listener, restartBtn);
+
+//在游戏上方加入显示分数的控件
+auto labTTfCardNumberName = LabelTTF::create(&quot;Score&quot;,&quot;Arial&quot;, 30);
+labTTfCardNumberName-&gt;setPosition(visibleSize.width / 5, visibleSize.height -150);
+addChild(labTTfCardNumberName);
+
+//在游戏上方加入显示分数的控件
+labTTFScore = LabelTTF::create(&quot;0&quot;, &quot;Arial&quot;, 30);
+labTTFScore-&gt;setPosition(visibleSize.width / 2 + 100, visibleSize.height - 150);
+addChild(labTTFScore);
+
+//加入aboutMe控件  
+aboutMe = MenuItemImage::create(&quot;About.png&quot;, &quot;About.png&quot;, CC_CALLBACK_1(HelloWorld::menuAboutMe, this));
+aboutMe-&gt;setColor(Color3B(204, 255, 253));
+aboutMe-&gt;setPosition(Vec2(origin.y + aboutMe-&gt;getContentSize().width / 2,
+    origin.y + aboutMe-&gt;getContentSize().height / 2));
+
+//创建一个退出游戏按钮
+auto closeItem = MenuItemImage::create(
+    &quot;CloseNormal.png&quot;,
+    &quot;CloseSelected.png&quot;,
+    CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+closeItem-&gt;setPosition(Vec2(origin.x + visibleSize.width - closeItem-&gt;getContentSize().width / 2,
+    origin.y + closeItem-&gt;getContentSize().height / 2));
+
+// create menu, it&apos;s an autorelease object
+auto menu = Menu::create(closeItem, aboutMe, NULL);
+menu-&gt;setPosition(Vec2::ZERO);
+this-&gt;addChild(menu, 1);
+
+//加入游戏手势识别的事件监听，进行绑定
+auto touchListener = EventListenerTouchOneByOne::create();
+touchListener-&gt;onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchBegan, this);
+touchListener-&gt;onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchEnded, this);
+_eventDispatcher-&gt;addEventListenerWithSceneGraphPriority(touchListener, this);
+
+//调用生成卡片的方法
+createCardSprite(visibleSize);
+
+//调用生成随机数方法,初始化生成两个数字
+autoCreateCardNumber();
+autoCreateCardNumber();
+return true;
+}
+
+//关于
+void HelloWorld::menuAboutMe(cocos2d::Ref* pSender)
+{
+if (isShow)
+{
+    Size visibleSize = Director::getInstance()-&gt;getVisibleSize();
+    menuAuthor = LabelTTF::create(String::createWithFormat(&quot;Author:YTW&quot;)-&gt;getCString(), &quot;hirakakuProN-w6&quot;, 25);
+    menuAuthor-&gt;setPosition(visibleSize.width / 2, visibleSize.height / 2 + 30);
+    menuAuthor-&gt;setColor(Color3B(48, 48, 48));
+    addChild(menuAuthor);
+
+    menuVersion = LabelTTF::create(String::createWithFormat(&quot;Version:1.0&quot;)-&gt;getCString(), &quot;hirakakuProN-w6&quot;, 20);
+    menuVersion-&gt;setPosition(visibleSize.width / 2, visibleSize.height / 2 - 30);
+    menuVersion-&gt;setColor(Color3B(48, 48, 48));
+    addChild(menuVersion);
+
+    menuConnect = LabelTTF::create(String::createWithFormat(&quot;mail box:YQQQ@outlook.com&quot;)-&gt;getCString(), &quot;hirakakuProN-w6&quot;, 20);
+    menuConnect-&gt;setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    menuConnect-&gt;setColor(Color3B(48, 48, 48));
+    addChild(menuConnect);
+
+    isShow = false;
+}
+else
+{        
+    menuAuthor-&gt;setVisible(false);
+    menuConnect-&gt;setVisible(false);
+    menuVersion-&gt;setVisible(false);
+
+    isShow = true;
+}
+
+}
+
+//游戏退出
+void HelloWorld::menuCloseCallback(cocos2d::Ref* pSender)
+{
+    Director::getInstance()-&gt;end();
+    exit(0);
+
+}
+
+//创建卡片
+void HelloWorld::createCardSprite(cocos2d::Size size)
+{
+//求出单元格的宽度和高度
+int lon = (size.width - 20) / 4;
+
+//4*4的单元格
+for (int i = 0; i &lt; 4; i++)
+{
+    for (int j = 0; j &lt; 4; j++)
+    {
+        CardSprite *card = CardSprite::createCardSprite(0, lon + 12, lon + 12, lon*i + 12, lon*j + 12 + size.height / 6);
+        addChild(card);
+
+        //将卡片添加到二维数组里面
+        cardArray[i][j] = card;
+    }
+}
+
+//创建临时卡片矩阵，用于动画，每个动画卡片对应一个实际卡片的动画，这是个技巧,并且动画层在卡片层之上，所以后加入，也可以设置addchild层次
+for (int i = 0; i &lt; 4; i++)
+{
+    for (int j = 0; j &lt; 4; j++)
+    {
+        //最左边留白12，最下面留白size.height/6
+        CardSprite *card = CardSprite::createCardSprite(0, lon, lon, lon*i + 12, lon*j + 12 + size.height / 6);
+        this-&gt;addChild(card);
+        cardArrAction[i][j] = card;
+        //一开始把这层全部隐藏
+        auto hide = Hide::create();
+        cardArrAction[i][j]-&gt;getCardLayer()-&gt;runAction(hide);
+    }
+}
+}
+
+void HelloWorld::autoCreateCardNumber()
+{
+int i = CCRANDOM_0_1() * 4;
+int j = CCRANDOM_0_1() * 4;
+
+//判断是否是已经存在的位置
+if (cardArray[i][j]-&gt;getNumber() &gt; 0)
+{
+    //如果大于0，说明这个格子已经存在数字,再次回调自己
+    autoCreateCardNumber();
+}
+else
+{
+    //给cardArray[i][j]随机生成一个数字，如果生成的数字小于1的话就给格子赋值4，否则是2
+    cardArray[i][j]-&gt;setNumber(CCRANDOM_0_1() * 10 &lt; 1 ? 4 : 2);
+
+    //用动画效果生成
+    auto action = Sequence::createWithTwoActions(ScaleTo::create(0, 0), ScaleTo::create(0.3f, 1));  //在0.3秒内从小缩放到大
+    cardArray[i][j]-&gt;getCardLayer()-&gt;runAction(action);  //用卡片的层而不是卡片精灵本身做动作是为了使用局部坐标缩放
+}
+}
+
+bool HelloWorld::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event)
+{
+//得到坐标
+Point touch0 = touch-&gt;getLocation();
+
+//获取初始的x y 坐标
+firstX = touch0.x;
+firstY = touch0.y;
+
+return true;
+}
+
+void HelloWorld::restart(Ref* sender)
+{
+    //转场，重新开始游戏
+    Director::getInstance()-&gt;replaceScene(TransitionFade::create(0.7f, HelloWorld::createScene()));
+}
+
+void HelloWorld::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event)
+{
+//获取X Y 轴的移动范围
+Point touchP0 = touch-&gt;getLocation();
+endX = firstX - touchP0.x;
+endY = firstY - touchP0.y;
+
+//判断 X轴 跟 Y轴的移动距离，如果X的绝对值大于Y轴的绝对值就是左右移动，否则上下移动
+if (abs(endX) &gt; abs(endY))
+{
+    if (endX - 5 &gt; 0)
+    {
+        //左边
+        if (doLeft())
+        {
+            autoCreateCardNumber();
+            doCheckGameOver();
+        }
+    }
+    else
+    {
+        //右边
+        if (doRight())
+        {
+            autoCreateCardNumber();
+            doCheckGameOver();
+        }
+    }
+}
+else
+{
+    if (endY - 5 &gt; 0)
+    {
+        //下边
+        if (doDown())
+        {
+            autoCreateCardNumber();
+            doCheckGameOver();
+        }
+    }
+    else
+    {
+        //上边
+        if (doUp())
+        {
+            autoCreateCardNumber();
+            doCheckGameOver();
+        }
+    }
+}
+}
+
+//判断游戏是否结束
+void HelloWorld::doCheckGameOver()
+{
+bool isGameOver = true;
+
+for (int i = 0; i &lt; 4; i++)
+{
+    for (int j = 0; j &lt; 4; j++)
+    {
+        if (cardArray[i][j]-&gt;getNumber() == 0
+            || (i &gt; 0 &amp;&amp; (cardArray[i][j])-&gt;getNumber() == cardArray[i - 1][j]-&gt;getNumber())
+            || (i &lt; 3 &amp;&amp; (cardArray[i][j])-&gt;getNumber() == cardArray[i + 1][j]-&gt;getNumber())
+            || (j &gt; 0 &amp;&amp; (cardArray[i][j])-&gt;getNumber() == cardArray[i][j - 1]-&gt;getNumber()
+            || (j &lt; 3 &amp;&amp; (cardArray[i][j])-&gt;getNumber() == cardArray[i][j + 1]-&gt;getNumber())))
+        {
+            isGameOver = false;
+        }
+    }
+}
+
+if (isGameOver)
+{
+    //获取屏幕大小
+    Size visibleSize = Director::getInstance()-&gt;getVisibleSize();
+
+    //结束时隐藏游戏界面的restartBtn
+    restartBtn-&gt;setVisible(false);
+
+    //创建菜单
+    auto menuTitle = LabelTTF::create(String::createWithFormat(&quot;Game Over&quot;)-&gt;getCString(), &quot;Arial&quot;, 40);
+    menuTitle-&gt;setPosition(visibleSize.width / 2, visibleSize.height / 2 + 50);
+    menuTitle-&gt;setColor(Color3B(48, 48, 48));
+    addChild(menuTitle);
+
+    auto menuScoreLabel = LabelTTF::create(String::createWithFormat(&quot;Score: %d&quot;, score)-&gt;getCString(), &quot;Arial&quot;, 25);
+    menuScoreLabel-&gt;setPosition(visibleSize.width / 2, visibleSize.height / 2 - 30);
+    menuScoreLabel-&gt;setColor(Color3B(48, 48, 48));
+    addChild(menuScoreLabel);
+
+    auto item1 = MenuItemFont::create(&quot;Restart&quot;, CC_CALLBACK_1(HelloWorld::menuCallback, this));
+    item1-&gt;setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 3));
+    item1-&gt;setColor(Color3B(255, 255,0));
+
+    auto menu = Menu::create(item1, NULL);
+    menu-&gt;setAnchorPoint(Vec2::ZERO);
+    menu-&gt;setPosition(Vec2::ZERO);
+    this-&gt;addChild(menu);
+}
+}
+
+//点击菜单中的restart会
+void HelloWorld::menuCallback(cocos2d::Ref* pSender)
+{
+Director::getInstance()-&gt;replaceScene(TransitionFade::create(1, HelloWorld::createScene()));
+}
+
+bool HelloWorld::doLeft()
+{
+bool isdo = false;
+
+//计算移动的步进间距
+auto cardSize = (Director::getInstance()-&gt;getVisibleSize().width - 5 * 4) / 4;
+for (int i = 0; i &lt; 4; i++)
+{
+    for (int j = 0; j &lt; 4; j++)
+    {
+        //这层循环用于判断每个块
+        for (int l = j + 1; l &lt; 4; l++)
+        {
+            if (cardArray[l][i]-&gt;getNumber() &gt; 0)//判断卡片里面的数字是否大于0
+            {
+                if (cardArray[j][i]-&gt;getNumber() &lt;= 0)
+                {
+                    //专门弄一个动画层卡片实现定位、显现、移动、隐藏系列动画
+                    auto place = Place::create(Point(cardSize*l + 12, cardSize*i + 12 + Director::getInstance()-&gt;getVisibleSize().height / 6));
+                    cardArrAction[l][i]-&gt;setNumber(cardArray[l][i]-&gt;getNumber());  //每次都重新把动画卡片重新定位到实际对应的卡片位置，并设置相同的数字
+                    auto show = Show::create();
+                    auto move = MoveBy::create(0.1f, Point(-cardSize*(l - j), 0));  //注意移动的距离
+                    auto hide = Hide::create();
+                    cardArrAction[l][i]-&gt;getCardLayer()-&gt;runAction(Sequence::create(place, show, move, hide, NULL));
+
+                    //如果x位置是空卡片，就把x1卡片移到x处，x1处变成空卡片
+                    cardArray[j][i]-&gt;setNumber(cardArray[l][i]-&gt;getNumber());//给左边的 格子赋值
+                    cardArray[l][i]-&gt;setNumber(0);//清空右边的格子
+
+                    j--;
+                    isdo = true;
+                }//如果两只数字相等就合并
+                else if (cardArray[j][i]-&gt;getNumber() == cardArray[l][i]-&gt;getNumber())
+                {
+                    auto place = Place::create(Point(cardSize*l + 12, cardSize*i + 12 + Director::getInstance()-&gt;getVisibleSize().height / 6));
+                    cardArrAction[l][i]-&gt;setNumber(cardArray[l][i]-&gt;getNumber());
+                    auto show = Show::create();
+                    auto move = MoveBy::create(0.1f, Point(-cardSize*(l - j), 0));  //注意移动的距离
+                    auto hide = Hide::create();
+                    cardArrAction[l][i]-&gt;getCardLayer()-&gt;runAction(Sequence::create(place, show, move, hide, NULL));
+
+                    //如果x位置是空卡片，就把x1卡片移到x处，x1处变成空卡片
+                    cardArray[j][i]-&gt;setNumber(cardArray[j][i]-&gt;getNumber() * 2);
+                    cardArray[l][i]-&gt;setNumber(0);
+
+                    //数字合并动画
+                    auto merge = Sequence::create(ScaleTo::create(0.1f, 1.2f), ScaleTo::create(0.1f, 1.0f), NULL);
+                    cardArray[j][i]-&gt;getCardLayer()-&gt;runAction(merge);
+
+                    //数字发生合并，添加分数
+                    score += cardArray[j][i]-&gt;getNumber();
+                    labTTFScore-&gt;setString(__String::createWithFormat(&quot;%i&quot;, score)-&gt;getCString());
+
+                    isdo = true;
+                }
+                break;
+            }
+        }
+    }
+}
+return isdo;
+}
+
+bool HelloWorld::doRight()
+{
+bool isdo = false;
+
+//计算移动的步进间距
+auto cardSize = (Director::getInstance()-&gt;getVisibleSize().width - 5 * 4) / 4;
+for (int i = 0; i &lt; 4; i++)
+{
+    for (int j = 3; j &gt;= 0; j--)
+    {
+        //这层循环用于判断每个块
+        for (int l = j - 1; l &gt;= 0; l--) 
+        {
+            if (cardArray[l][i]-&gt;getNumber() &gt; 0)//判断卡片里面的数字是否大于0
+            {
+                if (cardArray[j][i]-&gt;getNumber() &lt;= 0)
+                {
+                    //专门弄一个动画层卡片实现定位、显现、移动、隐藏系列动画
+                    auto place = Place::create(Point(cardSize*l + 12, cardSize*i + 12 + Director::getInstance()-&gt;getVisibleSize().height / 6));
+                    cardArrAction[l][i]-&gt;setNumber(cardArray[l][i]-&gt;getNumber());  //每次都重新把动画卡片重新定位到实际对应的卡片位置，并设置相同的数字
+                    auto show = Show::create();
+                    auto move = MoveBy::create(0.1f, Point(-cardSize*(l - j), 0));  //注意移动的距离
+                    auto hide = Hide::create();
+                    cardArrAction[l][i]-&gt;getCardLayer()-&gt;runAction(Sequence::create(place, show, move, hide, NULL));
+
+                    cardArray[j][i]-&gt;setNumber(cardArray[l][i]-&gt;getNumber());//给左边的 格子赋值
+                    cardArray[l][i]-&gt;setNumber(0);//清空右边的格子
+
+                    j++;
+                    isdo = true;
+                }//如果两只数字相等就合并
+                else if (cardArray[j][i]-&gt;getNumber() == cardArray[l][i]-&gt;getNumber())
+                {
+                    auto place = Place::create(Point(cardSize*l + 12, cardSize*i + 12 + Director::getInstance()-&gt;getVisibleSize().height / 6));
+                    cardArrAction[l][i]-&gt;setNumber(cardArray[l][i]-&gt;getNumber());
+                    auto show = Show::create();
+                    auto move = MoveBy::create(0.1f, Point(-cardSize*(l - j), 0));  //注意移动的距离
+                    auto hide = Hide::create();
+                    cardArrAction[l][i]-&gt;getCardLayer()-&gt;runAction(Sequence::create(place, show, move, hide, NULL));
+
+                    cardArray[j][i]-&gt;setNumber(cardArray[j][i]-&gt;getNumber() * 2);
+                    cardArray[l][i]-&gt;setNumber(0);
+
+                    //数字合并动画
+                    auto merge = Sequence::create(ScaleTo::create(0.1f, 1.2f), ScaleTo::create(0.1f, 1.0f), NULL);
+                    cardArray[j][i]-&gt;getCardLayer()-&gt;runAction(merge);
+
+                    //数字发生合并，添加分数
+                    score += cardArray[j][i]-&gt;getNumber();
+                    labTTFScore-&gt;setString(__String::createWithFormat(&quot;%i&quot;, score)-&gt;getCString());
+
+                    isdo = true;
+                }
+                break;
+            }
+        }
+    }
+}
+return isdo;
+}
+
+bool HelloWorld::doUp()
+{
+bool isdo = false;
+
+//计算移动的步进间距
+auto cardSize = (Director::getInstance()-&gt;getVisibleSize().width - 5 * 4) / 4;
+for (int j = 0; j &lt; 4; j++) 
+{
+    for (int i = 3; i &gt;= 0; i--) 
+    {
+        //这层循环用于判断每个块
+        for (int l = i - 1; l &gt;= 0; l--) 
+        {
+            if (cardArray[j][l]-&gt;getNumber() &gt; 0)//判断卡片里面的数字是否大于0
+            {
+                if (cardArray[j][i]-&gt;getNumber() &lt;= 0)
+                {
+                    auto place = Place::create(Point(cardSize*j + 12, cardSize*l + 12 + Director::getInstance()-&gt;getVisibleSize().height / 6));
+                    cardArrAction[j][l]-&gt;setNumber(cardArray[j][l]-&gt;getNumber());
+                    auto show = Show::create();
+                    auto move = MoveBy::create(0.1f, Point(0, -cardSize*(l - j)));  //注意移动的距离
+                    auto hide = Hide::create();
+                    cardArrAction[j][l]-&gt;getCardLayer()-&gt;runAction(Sequence::create(place, show, move, hide, NULL));
+
+                    cardArray[j][i]-&gt;setNumber(cardArray[j][l]-&gt;getNumber());//给左边的 格子赋值
+                    cardArray[j][l]-&gt;setNumber(0);//清空右边的格子
+
+                    i++;
+                    isdo = true;
+                }//如果两只数字相等就合并
+                else if (cardArray[j][i]-&gt;getNumber() == cardArray[j][l]-&gt;getNumber())
+                {
+                    auto place = Place::create(Point(cardSize*j + 12, cardSize*l + 12 + Director::getInstance()-&gt;getVisibleSize().height / 6));
+                    cardArrAction[j][l]-&gt;setNumber(cardArray[j][l]-&gt;getNumber());
+                    auto show = Show::create();
+                    auto move = MoveBy::create(0.1f, Point(0, -cardSize*(l - j)));  //注意移动的距离
+                    auto hide = Hide::create();
+                    cardArrAction[j][l]-&gt;getCardLayer()-&gt;runAction(Sequence::create(place, show, move, hide, NULL));
+
+                    cardArray[j][i]-&gt;setNumber(cardArray[j][l]-&gt;getNumber() * 2);
+                    cardArray[j][l]-&gt;setNumber(0);
+
+                    auto merge = Sequence::create(ScaleTo::create(0.1f, 1.2f), ScaleTo::create(0.1f, 1.0f), NULL);
+                    cardArray[j][i]-&gt;getCardLayer()-&gt;runAction(merge);
+
+                    //数字发生合并，添加分数
+                    score += cardArray[j][i]-&gt;getNumber();
+                    labTTFScore-&gt;setString(__String::createWithFormat(&quot;%i&quot;, score)-&gt;getCString());
+
+                    isdo = true;
+                }
+                break;
+            }
+        }
+    }
+}
+return isdo;
+}    
+
+bool HelloWorld::doDown()
+{
+bool isdo = false;
+
+//计算移动的步进间距
+auto cardSize = (Director::getInstance()-&gt;getVisibleSize().width - 5 * 4) / 4;
+for (int j = 0; j &lt; 4; j++)
+{
+    for (int i = 0; i &lt; 4; i++)
+    {
+        //这层循环用于判断每个块
+        for (int l = i + 1; l &lt; 4; l++)
+        {
+            if (cardArray[j][l]-&gt;getNumber() &gt; 0)//判断卡片里面的数字是否大于0
+            {
+                if (cardArray[j][i]-&gt;getNumber() &lt;= 0)
+                {
+                    auto place = Place::create(Point(cardSize*j + 12, cardSize*l + 12 + Director::getInstance()-&gt;getVisibleSize().height / 6));
+                    cardArrAction[j][l]-&gt;setNumber(cardArray[j][l]-&gt;getNumber());
+                    auto show = Show::create();
+                    auto move = MoveBy::create(0.1f, Point(0, -cardSize*(l - j)));  //注意移动的距离
+                    auto hide = Hide::create();
+                    cardArrAction[j][l]-&gt;getCardLayer()-&gt;runAction(Sequence::create(place, show, move, hide, NULL));
+
+                    cardArray[j][i]-&gt;setNumber(cardArray[j][l]-&gt;getNumber());//给左边的 格子赋值
+                    cardArray[j][l]-&gt;setNumber(0);//清空右边的格子
+
+                    i--;
+                    isdo = true;
+                }//如果两只数字相等就合并
+                else if (cardArray[j][i]-&gt;getNumber() == cardArray[j][l]-&gt;getNumber())
+                {
+                    auto place = Place::create(Point(cardSize*j + 12, cardSize*l + 12 + Director::getInstance()-&gt;getVisibleSize().height / 6));
+                    cardArrAction[j][l]-&gt;setNumber(cardArray[j][l]-&gt;getNumber());
+                    auto show = Show::create();
+                    auto move = MoveBy::create(0.1f, Point(0, -cardSize*(l - j)));  //注意移动的距离
+                    auto hide = Hide::create();
+                    cardArrAction[j][l]-&gt;getCardLayer()-&gt;runAction(Sequence::create(place, show, move, hide, NULL));
+
+                    cardArray[j][i]-&gt;setNumber(cardArray[j][l]-&gt;getNumber() * 2);
+                    cardArray[j][l]-&gt;setNumber(0);
+
+                    auto merge = Sequence::create(ScaleTo::create(0.1f, 1.2f), ScaleTo::create(0.1f, 1.0f), NULL);
+                    cardArray[j][i]-&gt;getCardLayer()-&gt;runAction(merge);
+
+                    //数字发生合并，添加分数
+                    score += cardArray[j][i]-&gt;getNumber();
+                    labTTFScore-&gt;setString(__String::createWithFormat(&quot;%i&quot;, score)-&gt;getCString());
+
+                    isdo = true;
+                }
+                break;//防止出现连续乘2
+            }
+        }
+    }
+}
+return isdo;
+}
+
+
+//尝试输出中文，win32成功，android失败
+//char* HelloWorld::G2U(const char* gb2312)
+//{
+//    int len = MultiByteToWideChar(CP_ACP, 0, gb2312, -1, NULL, 0);
+//    wchar_t* wstr = new wchar_t[len + 1];
+//    memset(wstr, 0, len + 1);
+//    MultiByteToWideChar(CP_ACP, 0, gb2312, -1, wstr, len);
+//    len = WideCharToMultiByte(CP_UTF8, 0, wstr, -1, NULL, 0, NULL, NULL);
+//    char* str = new char[len + 1];
+//    memset(str, 0, len + 1);
+//    WideCharToMultiByte(CP_UTF8, 0, wstr, -1, str, len, NULL, NULL);
+//    if (wstr) delete[] wstr;
+//    return str;
+//}
+</code></pre><p><strong>关键点</strong><br>关键点：</p>
+<p>1，专门弄了一个4*4的卡片临时矩阵做为动画层，也就是有16个卡片专门负责对应卡片的动画（卡片生成的动画是实际卡片，这个是例外）。</p>
+<p>2，关于游戏逻辑中每次移动后面都有一个break</p>
+<p><strong>成果展示</strong><br><img src="http://139.129.39.66/blog/2048One.png" alt="2048展示1"></p>
+<p><img src="http://139.129.39.66/blog/2048End.png" alt="2048展示2"></p>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2016. | by<a href="http://ytwnoone.xyz">会飞的僵尸</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
