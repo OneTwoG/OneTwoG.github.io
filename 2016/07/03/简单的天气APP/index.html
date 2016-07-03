@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      简单的天气APP | 会飞的僵尸 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="会飞的僵尸">
+    
+    
+
+    <meta name="description" content="学Android已经有一阵子了，通过这个项目实用一下自己学过的知识。
+程序整体分析
+主要有两个活动，一个用来选择查看天气的Activity，另一个用来显示所选的地方当前天气的Activity
+使用本地数据SQLite做数据本地化（主要存储地方的代号和名称）
+使用后台服务定时更新天气信息
+
+两个界面的XML选择查询天气地点的界面    &amp;lt;?xml version=”1.0” encoding=">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单的天气APP | 会飞的僵尸">
+<meta property="og:url" content="http://ytwnoone.xyz/2016/07/03/简单的天气APP/index.html">
+<meta property="og:site_name" content="会飞的僵尸">
+<meta property="og:description" content="学Android已经有一阵子了，通过这个项目实用一下自己学过的知识。
+程序整体分析
+主要有两个活动，一个用来选择查看天气的Activity，另一个用来显示所选的地方当前天气的Activity
+使用本地数据SQLite做数据本地化（主要存储地方的代号和名称）
+使用后台服务定时更新天气信息
+
+两个界面的XML选择查询天气地点的界面    &amp;lt;?xml version=”1.0” encoding=">
+<meta property="og:image" content="http://ytwnoone.xyz/img/weather.png">
+<meta property="og:updated_time" content="2016-07-03T13:39:13.359Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单的天气APP | 会飞的僵尸">
+<meta name="twitter:description" content="学Android已经有一阵子了，通过这个项目实用一下自己学过的知识。
+程序整体分析
+主要有两个活动，一个用来选择查看天气的Activity，另一个用来显示所选的地方当前天气的Activity
+使用本地数据SQLite做数据本地化（主要存储地方的代号和名称）
+使用后台服务定时更新天气信息
+
+两个界面的XML选择查询天气地点的界面    &amp;lt;?xml version=”1.0” encoding=">
+<meta name="twitter:image" content="http://ytwnoone.xyz/img/weather.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">会飞的僵尸</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          程序员改变世界，用代码分享快乐
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about/" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">简单的天气APP</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-07-03" class="post-meta__date date">2016-07-03</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Android/">Android</a>
+            </font>
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>学Android已经有一阵子了，通过这个项目实用一下自己学过的知识。</p>
+<h3 id="程序整体分析"><a href="#程序整体分析" class="headerlink" title="程序整体分析"></a>程序整体分析</h3><ul>
+<li>主要有两个活动，一个用来选择查看天气的Activity，另一个用来显示所选的地方当前天气的Activity</li>
+<li>使用本地数据SQLite做数据本地化（主要存储地方的代号和名称）</li>
+<li>使用后台服务定时更新天气信息</li>
+</ul>
+<h3 id="两个界面的XML"><a href="#两个界面的XML" class="headerlink" title="两个界面的XML"></a>两个界面的XML</h3><p>选择查询天气地点的界面<br>    &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"></linearlayout></p>
+<pre><code>&lt;RelativeLayout
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;50dp&quot;
+    android:background=&quot;@color/colorPrimaryDark&quot;&gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/title_text&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_centerInParent=&quot;true&quot;
+        android:textColor=&quot;#fff&quot;
+        android:textSize=&quot;24sp&quot;/&gt;
+&lt;/RelativeLayout&gt;
+
+&lt;ListView
+    android:id=&quot;@+id/lv_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;&gt;&lt;/ListView&gt;
+&lt;/LinearLayout&gt;
+</code></pre><p>该界面简单比较简单，第一个TextView用于显示所选地方所属的区域。ListView用于显示这个区域下所有的子区域。</p>
+<p>显示当前区域天气的XML<br>    &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"></linearlayout></p>
+<pre><code>&lt;RelativeLayout
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;50dp&quot;
+    android:background=&quot;@color/colorPrimaryDark&quot;&gt;
+
+    &lt;Button
+        android:id=&quot;@+id/switch_city&quot;
+        android:layout_width=&quot;30dp&quot;
+        android:layout_height=&quot;30dp&quot;
+        android:layout_centerVertical=&quot;true&quot;
+        android:layout_marginLeft=&quot;10dp&quot;
+        android:background=&quot;@drawable/ic_menu_home&quot;/&gt;
+    &lt;TextView
+        android:id=&quot;@+id/tv_city_name&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_centerInParent=&quot;true&quot;
+        android:textSize=&quot;24sp&quot;
+        android:textColor=&quot;#fff&quot;/&gt;
+    &lt;Button
+        android:id=&quot;@+id/refresh_weather&quot;
+        android:layout_width=&quot;30dp&quot;
+        android:layout_height=&quot;30dp&quot;
+        android:layout_alignParentRight=&quot;true&quot;
+        android:layout_centerVertical=&quot;true&quot;
+        android:layout_marginRight=&quot;10dp&quot;
+        android:background=&quot;@drawable/ic_popup_sync_1&quot;/&gt;
+&lt;/RelativeLayout&gt;
+
+&lt;RelativeLayout
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;0dp&quot;
+    android:layout_weight=&quot;1&quot;
+    android:background=&quot;#27A5F9&quot;&gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/tv_publish_time&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:textColor=&quot;#fff&quot;
+        android:textSize=&quot;18sp&quot;
+        android:layout_marginRight=&quot;10dp&quot;
+        android:layout_marginTop=&quot;10dp&quot;
+        android:layout_alignParentRight=&quot;true&quot; /&gt;
+
+    &lt;LinearLayout
+        android:id=&quot;@+id/layout_weather_info&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_centerInParent=&quot;true&quot;
+        android:orientation=&quot;vertical&quot;&gt;
+
+        &lt;ImageView
+            android:id=&quot;@+id/icon_weather&quot;
+            android:layout_width=&quot;50dp&quot;
+            android:layout_height=&quot;50dp&quot;
+            android:src=&quot;@drawable/logo&quot;
+            android:layout_gravity=&quot;center&quot;/&gt;
+
+        &lt;TextView
+            android:id=&quot;@+id/tv_current_date&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;40dp&quot;
+            android:gravity=&quot;center&quot;
+            android:textColor=&quot;#fff&quot;
+            android:textSize=&quot;18sp&quot; /&gt;
+
+        &lt;TextView
+            android:id=&quot;@+id/tv_weather_desp&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;60dp&quot;
+            android:layout_gravity=&quot;center_horizontal&quot;
+            android:gravity=&quot;center&quot;
+            android:textColor=&quot;#FFF&quot;
+            android:textSize=&quot;40sp&quot;/&gt;
+
+        &lt;LinearLayout
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;60dp&quot;
+            android:layout_gravity=&quot;center_horizontal&quot;
+            android:orientation=&quot;horizontal&quot;&gt;
+
+            &lt;TextView
+                android:id=&quot;@+id/tv_temp1&quot;
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;wrap_content&quot;
+                android:layout_gravity=&quot;center_vertical&quot;
+                android:textColor=&quot;#FFF&quot;
+                android:textSize=&quot;40sp&quot; /&gt;
+
+            &lt;TextView
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;wrap_content&quot;
+                android:layout_gravity=&quot;center_vertical&quot;
+                android:layout_marginLeft=&quot;10dp&quot;
+                android:layout_marginTop=&quot;10dp&quot;
+                android:gravity=&quot;center&quot;
+                android:textColor=&quot;#fff&quot;
+                android:textSize=&quot;40sp&quot;
+                android:text=&quot;~~&quot;/&gt;
+
+            &lt;TextView
+                android:id=&quot;@+id/tv_temp2&quot;
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;wrap_content&quot;
+                android:layout_gravity=&quot;center_vertical&quot;
+                android:textColor=&quot;#fff&quot;
+                android:textSize=&quot;40sp&quot;/&gt;
+        &lt;/LinearLayout&gt;
+    &lt;/LinearLayout&gt;
+&lt;/RelativeLayout&gt;
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="实现主要功能的Java类"><a href="#实现主要功能的Java类" class="headerlink" title="实现主要功能的Java类"></a>实现主要功能的Java类</h3><p>选择区域Activity类<br>    package activity;</p>
+<pre><code>import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.t.coolwheather.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import db.CoolWeatherOpenHelper;
+import model.City;
+import model.CoolWeatherDB;
+import model.County;
+import model.Province;
+import util.HttpCallbackListener;
+import util.HttpUtil;
+import util.Utility;
+
+/**
+ * Created by T on 2016/4/7.
+ */
+public class ChooseAreaActivity extends Activity {
+
+    public static final int LEVEL_PROVINCE = 0;
+    public static final int LEVEL_CITY = 1;
+    public static final int LEVEL_COUNTY = 2;
+
+    private ProgressDialog progressDialog;
+    private TextView titleText;
+    private ListView areaListView;
+    private ArrayAdapter&lt;String&gt; adapter;
+    private CoolWeatherDB coolWeatherDB;
+    private List&lt;String&gt; dataList = new ArrayList&lt;String&gt;();
+
+    private List&lt;Province&gt; provinceList;//省列表
+    private List&lt;City&gt; cityList;//市列表
+    private List&lt;County&gt; countyList;//县列表
+
+    private Province selectedProvince;//选中的省份
+    private City selectedCity;//选中的城市
+    private County selectedCounty;//选中的县
+
+    private int currentLevel;//当前选中的级别
+
+    private boolean isFromWeatherActivity;      //是否从WeatherActivity跳转过来
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.choose_area);
+
+        isFromWeatherActivity = getIntent().getBooleanExtra(&quot;from_weather_activity&quot;, false);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (prefs.getBoolean(&quot;city_selected&quot;, false) &amp;&amp; !isFromWeatherActivity){
+            Log.d(&quot;Choose&quot;, &quot;onCreate: &quot; + &quot;测试&quot;);
+            Intent intent = new Intent(this, WeatherActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
+        initView();//初始化各种控件
+
+        areaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {
+                if (currentLevel == LEVEL_PROVINCE){//如果当前选择是省级
+                    selectedProvince = provinceList.get(position);//实例化Province对象，并获取到点击到的对象
+
+                    queryCities();
+                }else if (currentLevel == LEVEL_CITY){
+                    selectedCity = cityList.get(position);//实例化City对象，并获取到点击到的对象
+                    queryCounties();
+                }else if (currentLevel == LEVEL_COUNTY){
+                    String countyCode = countyList.get(position).getCountyCode();
+                    Intent intent = new Intent(ChooseAreaActivity.this, WeatherActivity.class);
+                    intent.putExtra(&quot;county_code&quot;, countyCode);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+        queryProvince();
+    }
+
+    /**
+     * 捕获back按键，根据当前的级别来判断，此时应该返回市列表，省列表，还是直接退出
+     */
+    @Override
+    public void onBackPressed() {
+        if (currentLevel == LEVEL_COUNTY){
+            queryCities();
+        }else if (currentLevel == LEVEL_CITY){
+            queryProvince();
+        }else {
+            if (isFromWeatherActivity){
+                Intent intent = new Intent(this, WeatherActivity.class);
+                startActivity(intent);
+            }
+            finish();
+        }
+    }
+
+    private void queryProvince() {
+        provinceList = coolWeatherDB.loadProvinces();
+
+        if (provinceList.size() &gt; 0){
+            dataList.clear();
+            for (Province p : provinceList){
+                dataList.add(p.getProvinceName());//从数据库中读取全国所有的省份
+            }
+            adapter.notifyDataSetChanged();
+            areaListView.setSelection(0);
+            titleText.setText(&quot;中国&quot;);
+            currentLevel = LEVEL_PROVINCE;
+        }else {//否则从服务器中查询
+            queryFromServer(null, &quot;province&quot;);
+        }
+    }
+
+    /**
+     * 查询选中市所有的县，有限从数据库查询，如果没有再到服务器查询
+     */
+    private void queryCounties() {
+        countyList = coolWeatherDB.loadCounty(selectedCity.getId());//从数据库中获取选中市所有的县的集合
+
+        if (countyList.size() &gt; 0){
+            dataList.clear();//先清空之前存储的市级的数据
+            for (County c : countyList){
+                dataList.add(c.getCountyName());//将市所有的县名称添加到dataList中
+            }
+            adapter.notifyDataSetChanged();
+            areaListView.setSelection(0);
+            titleText.setText(selectedCity.getCityName());
+            currentLevel = LEVEL_COUNTY;
+        }else {
+            //否则从服务器中查询
+            queryFromServer(selectedCity.getCityCode(), &quot;county&quot;);
+        }
+    }
+
+    /**
+     * 查询选中省的所有市，优先从数据库查询，如果没有再到服务器上查询
+     */
+    private void queryCities() {
+        cityList = coolWeatherDB.loadCity(selectedProvince.getId());
+
+        if (cityList.size() &gt; 0){
+            dataList.clear();//先清空之前存储的省份的数据
+            for (City c : cityList){
+                dataList.add(c.getCityName());
+            }
+
+            adapter.notifyDataSetChanged();
+            areaListView.setSelection(0);
+            titleText.setText(selectedProvince.getProvinceName());
+            currentLevel = LEVEL_CITY;
+        }else {
+            //否则从服务器中查询
+            queryFromServer(selectedProvince.getProvinceCode(), &quot;city&quot;);
+        }
+    }
+
+    /**
+     * 根据传入的代号和类型从服务器上查询省市县数据
+     * @param code
+     * @param type
+     */
+    private void queryFromServer(final String code, final String type) {
+        String address;
+        if (!TextUtils.isEmpty(code)){
+            //如果code不为空，则返回的是省内所有的市
+            address = &quot;http://www.weather.com.cn/data/list3/city&quot; + code + &quot;.xml&quot;;
+        }else {
+            //如果code为空，则返回的是全国各省的数据
+            address = &quot;http://www.weather.com.cn/data/list3/city.xml&quot;;
+        }
+        showProgressDialog();
+
+        /**
+         * 调用sendHttpRequest() 从服务器获取数据
+         */
+        HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
+            @Override
+            public void onFinish(String response) {
+                boolean result = false;
+
+                if (&quot;province&quot;.equals(type)){
+                    result = Utility.handleProvincesResponse(coolWeatherDB, response);//将数据存储到本地数据库
+                }else if (&quot;city&quot;.equals(type)){
+                    result = Utility.handlerCitiesResponse(coolWeatherDB, response, selectedProvince.getId());//将数据存储到本地数据库
+                }else if (&quot;county&quot;.equals(type)){
+                    result = Utility.handlerCounties(coolWeatherDB, response, selectedCity.getId());//将数据存储到本地数据库
+                }
+
+                if (result){
+                    //通过runOnUiThread()方法回到主线程处理逻辑
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            closeProgressDialog();
+                            if (&quot;province&quot;.equals(type)){
+                                queryProvince();//从本地数据库读取数据
+                            }else if (&quot;city&quot;.equals(type)){
+                                queryCities();//从本地数据库读取数据
+                            }else if (&quot;county&quot;.equals(type)){
+                                queryCounties();//从本地数据库读取数据
+                        }
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        closeProgressDialog();
+                        Toast.makeText(ChooseAreaActivity.this, &quot;加载失败&quot;, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * 关闭进度对话框
+     */
+    private void closeProgressDialog() {
+        if (progressDialog != null){
+            progressDialog.dismiss();
+        }
+    }
+
+    /**
+     * 显示进度对话框
+     */
+    private void showProgressDialog() {
+        if (progressDialog == null){
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage(&quot;正在加载....&quot;);
+            progressDialog.setCanceledOnTouchOutside(false);
+        }
+        progressDialog.show();
+    }
+
+    private void initView() {
+        areaListView = (ListView) findViewById(R.id.lv_view);
+        titleText = (TextView) findViewById(R.id.title_text);
+        adapter = new ArrayAdapter&lt;String&gt;(this, android.R.layout.simple_list_item_1, dataList);
+        areaListView.setAdapter(adapter);
+        coolWeatherDB = CoolWeatherDB.getInstance(this);//获取CoolWeatherDB对象实例
+    }
+}
+</code></pre><p>显示当前天气的Activity类</p>
+<pre><code>package activity;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.example.t.coolwheather.R;
+
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+
+import service.AutoUpdateService;
+import util.HttpCallbackListener;
+import util.HttpUtil;
+import util.Utility;
+
+import static com.example.t.coolwheather.R.id.tv_temp1;
+
+/**
+ * Created by T on 2016/4/13.
+ */
+public class WeatherActivity extends Activity implements View.OnClickListener {
+
+    private LinearLayout weatherInfoLayout;
+    private TextView cityTextName;//用于显示城市的名称
+    private TextView publishText;//用于显示发布时间
+    private TextView weatherDespText;//用于显示天气描述信息
+    private TextView temp1Text;//用于显示气温1
+    private TextView temp2Text;//用于显示气温2
+    private TextView currentDatetext;//用于显示当前时间
+
+    private Button switchCity;      //用于切换城市
+    private Button refreshWeather;      //更新天气按钮
+
+    private ImageView iconWeather;      //天气图标
+    private Bitmap bm = null;// 生成了一张bmp图像
+
+    private String imgAddress = &quot;http://m.weather.com.cn/img/&quot;;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.weather_layout);
+
+        initView();//初始化
+
+        switchCity.setOnClickListener(this);        //切换城市按钮监听事件
+        refreshWeather.setOnClickListener(this);    //刷新监听事件
+
+        String countyCode = getIntent().getStringExtra(&quot;county_code&quot;);//获取从ChooseActivity传过来的county_code
+        //对countyCode进行判断
+        if (!TextUtils.isEmpty(countyCode)) {
+            //有县级代号就查询天气
+            publishText.setText(&quot;同步中....&quot;);
+
+            weatherInfoLayout.setVisibility(View.INVISIBLE);//将weatherInfoLayout布局先隐藏
+            cityTextName.setVisibility(View.INVISIBLE);//将cityName控件隐藏
+
+            queryWeatherCode(countyCode);
+        } else {
+            //没有县级代号就显示本地天气
+            showWeather();
+        }
+    }
+
+    /**
+     * 查询县级代号所对应的天气代号
+     *
+     * @param countyCode
+     */
+    private void queryWeatherCode(String countyCode) {
+        String address = &quot;http://www.weather.com.cn/data/list3/city&quot; + countyCode + &quot;.xml&quot;;
+        queryForServer(address, &quot;countyCode&quot;);
+    }
+
+    /**
+     * 查询天气代号所对应的天气
+     *
+     * @param weatherCode
+     */
+    private void queryWeatherInfo(String weatherCode) {
+        String address = &quot;http://www.weather.com.cn/data/cityinfo/&quot; + weatherCode + &quot;.html&quot;;
+        queryForServer(address, &quot;weatherCode&quot;);//从服务器查询天气
+    }
+
+    /**
+     * 根据传入的地址和类型去向服务器查询天气代号或者天气信息
+     *
+     * @param address
+     * @param type
+     */
+    private void queryForServer(final String address, final String type) {
+//        Log.d(&quot;WeatherActivity---&gt;&quot;, address);
+        HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
+            @Override
+            public void onFinish(final String response) {
+                Log.d(&quot;WeatherActivity---&gt;&quot;, response);
+                if (&quot;countyCode&quot;.equals(type)) {
+                    if (!TextUtils.isEmpty(response)) {
+                        //从服务器返回的数据中解析出天气代号
+                        //解析出来的数据实例为  县级名称|天气代号
+                        String[] array = response.split(&quot;\\|&quot;);
+                        if (array != null &amp;&amp; array.length == 2) {
+                            String weatherCode = array[1];//拿到天气代号
+                            queryWeatherInfo(weatherCode);
+                        }
+                    }
+                } else if (&quot;weatherCode&quot;.equals(type)) {
+                    Log.v(&quot;返回的json是---&gt;&quot;, response);
+                    //处理服务器返回的天气信息
+                    Utility.handlerWeatherResponse(WeatherActivity.this, response);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showWeather();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        publishText.setText(&quot;同步失败&quot;);
+                        showWeather();
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * 从SharedPreference文件中读取存储的天气信息，并显示到界面上
+     */
+    private void showWeather() {
+
+//        queryForServer(address, &quot;weatherCode&quot;);//从服务器查询天气
+        SharedPreferences preds = PreferenceManager.getDefaultSharedPreferences(this);
+
+        cityTextName.setText(preds.getString(&quot;city_name&quot;, &quot;&quot;));
+        temp1Text.setText(preds.getString(&quot;temp1&quot;, &quot;&quot;));
+        temp2Text.setText(preds.getString(&quot;temp2&quot;, &quot;&quot;));
+
+        Log.d(&quot;test&quot;, &quot;showWeather: &quot; + preds.getString(&quot;weather_desp&quot;, &quot;&quot;));
+        weatherDespText.setText(preds.getString(&quot;weather_desp&quot;, &quot;&quot;));
+        publishText.setText(&quot;今天&quot; + preds.getString(&quot;publish_time&quot;, &quot;&quot;) + &quot;发布&quot;);
+
+        currentDatetext.setText(preds.getString(&quot;current_time&quot;, &quot;&quot;));
+
+        weatherInfoLayout.setVisibility(View.VISIBLE);//将weatherInfoLayout设置为可见
+        currentDatetext.setVisibility(View.VISIBLE);    //将时间显示可见
+        cityTextName.setVisibility(View.VISIBLE);   //将citytextName设置为可见
+
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
+
+        String img = preds.getString(&quot;img&quot;, &quot;&quot;);
+
+        setBitmap(preds);
+    }
+
+    private void setBitmap(SharedPreferences preds) {
+        final SharedPreferences predss = preds;
+        new Thread() {
+            @Override
+            public void run() {
+                getBiamapFromServer(imgAddress + predss.getString(&quot;img&quot;, &quot;&quot;));
+            }
+        }.start();
+    }
+
+    private Bitmap getBiamapFromServer(String img) {
+        try {
+            URL iconurl = new URL(img);
+            URLConnection conn = iconurl.openConnection();
+            conn.connect();
+            // 获得图像的字符流
+            InputStream is = conn.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is, 1024);
+            bm = BitmapFactory.decodeStream(bis);
+            bis.close();
+            is.close();// 关闭流
+            handler.sendEmptyMessage(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bm;
+    }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    iconWeather.setImageBitmap(bm);
+                    break;
+            }
+        }
+    };
+
+    private void initView() {
+        weatherInfoLayout = (LinearLayout) findViewById(R.id.layout_weather_info);
+        cityTextName = (TextView) findViewById(R.id.tv_city_name);
+        publishText = (TextView) findViewById(R.id.tv_publish_time);
+        weatherDespText = (TextView) findViewById(R.id.tv_weather_desp);
+        temp1Text = (TextView) findViewById(tv_temp1);
+        temp2Text = (TextView) findViewById(R.id.tv_temp2);
+        currentDatetext = (TextView) findViewById(R.id.tv_current_date);
+        switchCity = (Button) findViewById(R.id.switch_city);
+        refreshWeather = (Button) findViewById(R.id.refresh_weather);
+        iconWeather = (ImageView) findViewById(R.id.icon_weather);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.switch_city:
+                Intent intent = new Intent(this, ChooseAreaActivity.class);
+                intent.putExtra(&quot;from_weather_activity&quot;, true);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.refresh_weather:
+                publishText.setText(&quot;同步中....&quot;);
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                String weatherCode = prefs.getString(&quot;weather_code&quot;, &quot;&quot;);
+                if (!TextUtils.isEmpty(weatherCode)) {
+                    queryWeatherInfo(weatherCode);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+}
+</code></pre><h3 id="建立数据库的类"><a href="#建立数据库的类" class="headerlink" title="建立数据库的类"></a>建立数据库的类</h3><pre><code>package db;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * Created by T on 2016/4/7.
+ */
+public class CoolWeatherOpenHelper extends SQLiteOpenHelper {
+
+    /***
+     * Province建表语句
+     */
+    public static final String CREATE_PROVINCE = &quot;create table Province&quot; + &quot;(id integer primary key autoincrement, &quot;
+                                                + &quot;province_name text, &quot;
+                                                + &quot;province_code text)&quot;;
+
+    /***
+     * City建表语句
+     */
+    public static final String CREATE_CITY = &quot;create table City&quot; + &quot;(id integer primary key autoincrement, &quot;
+                                                + &quot;city_name text, &quot;
+                                                + &quot;city_code text, &quot;
+                                                + &quot;province_id integer)&quot;;
+
+    /***
+     * County建表语句
+     */
+    public static final String CREATE_COUNTY = &quot;create table County&quot; + &quot;(id integer primary key autoincrement, &quot;
+                                                + &quot;county_name text, &quot;
+                                                + &quot;county_code text, &quot;
+                                                + &quot;city_id integer)&quot;;
+
+    public CoolWeatherOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
+    }
+
+    /***
+     * 在onCreate()方法里面执行建表
+     * @param db
+     */
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(CREATE_PROVINCE);
+        db.execSQL(CREATE_CITY);//创建City表
+        db.execSQL(CREATE_COUNTY);//创建County表
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    }
+}
+</code></pre><h3 id="读写本地数据库的类"><a href="#读写本地数据库的类" class="headerlink" title="读写本地数据库的类"></a>读写本地数据库的类</h3><pre><code>package model;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import db.CoolWeatherOpenHelper;
+
+/**
+ * 该类主要封装了一些常用的数据库操作
+ * Created by T on 2016/4/7.
+ */
+public class CoolWeatherDB {
+
+    /**
+     * 数据库名称
+     */
+    public static final String DB_NAME = &quot;cool_weather&quot;;
+
+    /**
+     * 数据库版本
+     */
+    public static final int VERSION = 1;
+
+    /**
+     * 创建CoolWeatherDB SQLiteDatabase 对象
+     */
+    public static CoolWeatherDB coolWeatherDB;
+    private SQLiteDatabase db;
+
+    /**
+     * 创建一个构造方法，并私有化
+     *
+     * @param context
+     */
+    private CoolWeatherDB(Context context) {
+        //创建一个CoolWeatherOpenHelper对象
+        CoolWeatherOpenHelper coolWeatherOpenHelper = new CoolWeatherOpenHelper(context, DB_NAME, null, VERSION);
+
+        //执行getWritableDatabase()方法,获得一个SQLiteDatabase对象
+        db = coolWeatherOpenHelper.getWritableDatabase();
+    }
+
+    /**
+     * 获取CoolWeatherDB的实例
+     *
+     * @param context
+     * @return
+     */
+    public synchronized static CoolWeatherDB getInstance(Context context) {
+
+        if (coolWeatherDB == null) {
+            coolWeatherDB = new CoolWeatherDB(context);
+        }
+
+        return coolWeatherDB;
+    }
+
+    /**
+     * 将Province实例存储到数据库
+     *
+     * @param province
+     */
+    public void saveProvince(Province province) {
+
+        if (province != null) {
+            ContentValues values = new ContentValues();
+            values.put(&quot;province_name&quot;, province.getProvinceName());
+            values.put(&quot;province_code&quot;, province.getProvinceCode());
+            db.insert(&quot;Province&quot;, null, values);
+        }
+    }
+
+    /**
+     * 从数据库中读取全国所有的省份信息
+     *
+     * @return
+     */
+    public List&lt;Province&gt; loadProvinces() {
+
+        List&lt;Province&gt; list = new ArrayList&lt;Province&gt;();
+
+        //执行数据库查询语句，并接收返回的结果
+        Cursor cursor = db.query(&quot;Province&quot;, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //创建一个Province对象
+                Province province = new Province();
+                province.setId(cursor.getInt(cursor.getColumnIndex(&quot;id&quot;)));//获取id列的值
+                province.setProvinceName(cursor.getString(cursor.getColumnIndex(&quot;province_name&quot;)));//获取province_name列的值
+                province.setProvinceCode(cursor.getString(cursor.getColumnIndex(&quot;province_code&quot;)));//获取province_code列的值
+
+                //将读取出来的每个Province对象添加到List
+                list.add(province);
+            } while (cursor.moveToNext());
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        return list;
+    }
+
+    /**
+     * 将City实例存储到数据库
+     *
+     * @param city
+     */
+    public void saveCity(City city) {
+
+        if (city != null) {
+            ContentValues values = new ContentValues();
+            values.put(&quot;city_name&quot;, city.getCityName());
+            values.put(&quot;city_code&quot;, city.getCityCode());
+            values.put(&quot;province_id&quot;, city.getProvinceId());
+
+            //执行数据库插入操作
+            db.insert(&quot;City&quot;, null, values);
+        }
+    }
+
+    /**
+     * 从数据库 读取某省下所有的城市的信息
+     *
+     * @param provinceId 外键,所要查询省份的ID
+     * @return
+     */
+    public List&lt;City&gt; loadCity(int provinceId) {
+        //创建一个集合对象
+        List&lt;City&gt; list = new ArrayList&lt;City&gt;();
+
+        Log.v(&quot;provinceId---&gt;&quot;, provinceId + &quot;&quot;);
+
+        //执行数据库查询操作，并接收返回的数据
+        Cursor cursor = db.query(&quot;City&quot;, null, &quot;province_id = ?&quot;, new String[]{String.valueOf(provinceId)}, null, null, null);
+
+//        Cursor cursor = db.query(&quot;City&quot;, null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                //创建一个City对象接收数据
+                City city = new City();
+                city.setId(cursor.getInt(cursor.getColumnIndex(&quot;id&quot;)));
+                city.setCityName(cursor.getString(cursor.getColumnIndex(&quot;city_name&quot;)));
+                city.setCityCode(cursor.getString(cursor.getColumnIndex(&quot;city_code&quot;)));
+                city.setProvinceId(provinceId);
+
+                //将city对象添加到List集合
+                list.add(city);
+            } while (cursor.moveToNext());
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        return list;
+    }
+
+    /**
+     * 将County实例存储到数据库中
+     *
+     * @param county
+     */
+    public void saveCounty(County county) {
+
+        if (county != null) {
+            ContentValues values = new ContentValues();
+            values.put(&quot;county_name&quot;, county.getCountyName());
+            values.put(&quot;county_code&quot;, county.getCountyCode());
+            values.put(&quot;city_id&quot;, county.getCityId());
+
+            //执行数据库插入操作
+            db.insert(&quot;County&quot;, null, values);
+        }
+    }
+
+    /**
+     * 从数据库中读取某城市下所有县的信息
+     *
+     * @param cityId
+     * @return
+     */
+    public List&lt;County&gt; loadCounty(int cityId) {
+        //创建一个List集合，用于存放County实例
+        List&lt;County&gt; list = new ArrayList&lt;County&gt;();
+
+        //执行数据库查询操作，并用Cursor接收返回的数据
+        Cursor cursor = db.query(&quot;County&quot;, null, &quot;city_id   = ?&quot;, new String[]{String.valueOf(cityId)}, null, null, null);
+
+        if (cursor.moveToFirst()){
+            do {
+                //创建County实例，用于存储从数据库读取出来的数据
+                County county = new County();
+                county.setId(cursor.getInt(cursor.getColumnIndex(&quot;id&quot;)));
+                county.setCountyName(cursor.getString(cursor.getColumnIndex(&quot;county_name&quot;)));
+                county.setCountyCode(cursor.getString(cursor.getColumnIndex(&quot;county_code&quot;)));
+                county.setCityId(cityId);
+
+                //将读取出来的county实例对象添加到List
+                list.add(county);
+            }while (cursor.moveToNext());
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return list;
+    }
+}
+</code></pre><h3 id="自动更新天气信息的服务类"><a href="#自动更新天气信息的服务类" class="headerlink" title="自动更新天气信息的服务类"></a>自动更新天气信息的服务类</h3><pre><code>package service;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.IBinder;
+import android.os.SystemClock;
+import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
+
+import util.HttpCallbackListener;
+import util.HttpUtil;
+import util.Utility;
+
+/**
+ * Created by T on 2016/7/1.
+ */
+
+public class AutoUpdateService extends Service {
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        new Thread(){
+            @Override
+            public void run() {
+                updateWeather();
+            }
+        }.start();
+        AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        int anHour = 4 * 60 * 60 * 1000;        //四小时的毫秒数
+        long triggerAtTime = SystemClock.elapsedRealtime() + anHour;
+
+        Intent i = new Intent(this, AutoUpdateReceiver.class);
+        PendingIntent pi = PendingIntent.getBroadcast(this, 0 , i ,0);
+        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi);
+
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    /**
+     * 更新天气信息
+     */
+    private void updateWeather() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String weatherCode = prefs.getString(&quot;weather_code&quot;, &quot;&quot;);
+        String address = &quot;http://www.weather.com.cn.data/cityinfo/&quot; + weatherCode + &quot;.html&quot;;
+
+        HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
+            @Override
+            public void onFinish(String response) {
+                Utility.handlerWeatherResponse(AutoUpdateService.this, response);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+}
+</code></pre><h3 id="通过广播再次启动服务"><a href="#通过广播再次启动服务" class="headerlink" title="通过广播再次启动服务"></a>通过广播再次启动服务</h3><pre><code>package service;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+
+/**
+ * Created by T on 2016/7/1.
+ */
+
+public class AutoUpdateReceiver extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Intent i = new Intent(context, AutoUpdateService.class);
+        context.startService(i);
+    }
+}
+</code></pre><h3 id="其他工具类"><a href="#其他工具类" class="headerlink" title="其他工具类"></a>其他工具类</h3><pre><code>package util;
+
+/**
+ * 定义一个接口，用来回调服务返回的结果
+ * Created by T on 2016/4/7.
+ */
+public interface HttpCallbackListener {
+
+    void onFinish(String response);
+
+    void onError(Exception e);
+}
+</code></pre><h4 id="访问网络获取数据的工具类"><a href="#访问网络获取数据的工具类" class="headerlink" title="访问网络获取数据的工具类"></a>访问网络获取数据的工具类</h4><pre><code>package util;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+/**
+ * Created by T on 2016/4/7.
+ */
+public class HttpUtil {
+    public static void sendHttpRequest(final String address, final HttpCallbackListener listener){
+        new Thread(){
+            @Override
+            public void run() {
+                HttpURLConnection connection = null;//定义一个HttpURLConnection对象
+
+                try {
+                    URL url = new URL(address);
+                    connection = (HttpURLConnection) url.openConnection();//获取HttpURLConnection实例
+                    connection.setRequestMethod(&quot;GET&quot;);//这是GET方法，从服务器获取数据
+                    connection.setConnectTimeout(8000);//设置连接的时间
+                    connection.setReadTimeout(8000);//设置读取时间
+                    InputStream is = connection.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+                    StringBuilder response = new StringBuilder();
+                    String line;
+
+                    while ((line = reader.readLine()) != null){
+                        response.append(line);
+                    }
+
+                    if (listener != null){
+                        //回调onFinish()方法
+                        Log.e(&quot;sendHttpResponse---&gt;&quot;,response.toString() + &quot;&quot;);
+                        listener.onFinish(response.toString());
+                    }
+                } catch (Exception e) {
+                    if (listener != null){
+                        listener.onError(e);
+                    }
+                }finally {
+                    if (connection != null){
+                        connection.disconnect();
+                    }
+                }
+            }
+        }.start();
+    }
+}
+</code></pre><h4 id="解析返回信息的工具类"><a href="#解析返回信息的工具类" class="headerlink" title="解析返回信息的工具类"></a>解析返回信息的工具类</h4><pre><code>package util;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+import android.util.Log;
+
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import model.City;
+import model.CoolWeatherDB;
+import model.County;
+import model.Province;
+
+/**
+ * 工具类，用来解析服务器返回的 省市县 的数据， 返回格式为 代号|城市，代号|城市
+ * Created by T on 2016/4/7.
+ */
+public class Utility {
+
+    /**
+     * 解析从服务器解析返回的JSON数据，并将解析的数据保存到本地
+     *
+     * @param context
+     * @param response
+     */
+    public static void handlerWeatherResponse(Context context, String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONObject weatherInfo = jsonObject.getJSONObject(&quot;weatherinfo&quot;);
+
+            String cityName = weatherInfo.getString(&quot;city&quot;);
+            String weatherCode = weatherInfo.getString(&quot;cityid&quot;);
+            String temp1 = weatherInfo.getString(&quot;temp1&quot;);
+            String temp2 = weatherInfo.getString(&quot;temp2&quot;);
+            String weatherDesp = weatherInfo.getString(&quot;weather&quot;);
+            String publishTime = weatherInfo.getString(&quot;ptime&quot;);
+            String img = weatherInfo.getString(&quot;img2&quot;);
+
+            saveWeatherInfo(context, cityName, weatherCode, temp1, temp2, weatherDesp, publishTime, img);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 将服务器返回的所有天气信息存储到SharedPreferences文件中
+     *  @param context
+     * @param cityName
+     * @param weatherCode
+     * @param temp1
+     * @param temp2
+     * @param weatherDesp
+     * @param publishTime
+     * @param img
+     */
+    private static void saveWeatherInfo(Context context, String cityName, String weatherCode, String temp1, String temp2, String weatherDesp, String publishTime, String img) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy年M月d日&quot;, Locale.CANADA);
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+
+        editor.putBoolean(&quot;city_selected&quot;, true);
+        editor.putString(&quot;city_name&quot;, cityName);
+        editor.putString(&quot;weather_code&quot;, weatherCode);
+        editor.putString(&quot;temp1&quot;, temp1);
+        editor.putString(&quot;temp2&quot;, temp2);
+        editor.putString(&quot;weather_desp&quot;, weatherDesp);
+        editor.putString(&quot;publish_time&quot;, publishTime);
+        editor.putString(&quot;current_time&quot;, sdf.format(new Date()));
+        editor.putString(&quot;img&quot;, img);
+        editor.commit();
+    }
+
+
+    /**
+     * 解析和处理服务器返回的省级数据
+     *
+     * @param coolWeatherDB
+     * @param response
+     * @return
+     */
+    public synchronized static boolean handleProvincesResponse(CoolWeatherDB coolWeatherDB, String response) {
+
+        if (!TextUtils.isEmpty(response)) {
+            String[] allProvinces = response.split(&quot;,&quot;);//第一层解析，创建一个String数组，接收解析出来的数据，
+
+            if (allProvinces != null &amp;&amp; allProvinces.length &gt; 0) {
+                for (String p : allProvinces) {
+                    String[] array = p.split(&quot;\\|&quot;);//第二层解析，再创建一个String数组,分别存放 代号 和 城市
+
+                    //创建一个Province对象，并将解析出来的数据分别给 code name 赋值
+                    Province province = new Province();
+                    province.setProvinceCode(array[0]);
+                    province.setProvinceName(array[1]);
+
+                    coolWeatherDB.saveProvince(province);//将从服务器解析出来的数据存储到本地数据库
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 解析和处理服务器传回来的市级数据
+     *
+     * @param coolWeatherDB
+     * @param response
+     * @param provinceId    province的外键
+     * @return
+     */
+    public static boolean handlerCitiesResponse(CoolWeatherDB coolWeatherDB, String response, int provinceId) {
+
+        if (!TextUtils.isEmpty(response)) {
+            String[] allCities = response.split(&quot;,&quot;);//第一层解析,创建一个String数组，接收解析出来的数据
+
+            if (allCities != null &amp;&amp; allCities.length &gt; 0) {
+                for (String c : allCities) {
+                    String[] array = c.split(&quot;\\|&quot;);//第二层解析，创建一个String数组，接收解析出来的code 和 name
+
+                    //创建一个City对象，并将解析出来的code name 赋值给实体类的变量
+                    City city = new City();
+                    city.setCityCode(array[0]);
+                    city.setCityName(array[1]);
+                    city.setProvinceId(provinceId);
+
+                    coolWeatherDB.saveCity(city);//将从服务器解析出来的City数据保存到本地数据库
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 处理和解析服务器返回的县级的数据
+     *
+     * @param coolWeatherDB
+     * @param response
+     * @param cityId
+     * @return
+     */
+    public static boolean handlerCounties(CoolWeatherDB coolWeatherDB, String response, int cityId) {
+
+        if (!TextUtils.isEmpty(response)) {
+            String[] counties = response.split(&quot;,&quot;);//第一次解析
+
+            if (counties != null &amp;&amp; counties.length &gt; 0) {
+                for (String c : counties) {
+                    String[] array = c.split(&quot;\\|&quot;);//第二层解析
+
+                    County county = new County();
+                    county.setCountyCode(array[0]);
+                    county.setCountyName(array[1]);
+                    county.setCityId(cityId);
+
+                    coolWeatherDB.saveCounty(county);
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+}
+</code></pre><p>项目运行结果：<br><img src="/img/weather.png" alt="wearher展示"></p>
+<h3 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h3><p><a href="git@github.com:OneTwoG/simpleWeather.git">git@github.com:OneTwoG/simpleWeather.git</a></p>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2016. | by<a href="http://ytwnoone.xyz">会飞的僵尸</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
