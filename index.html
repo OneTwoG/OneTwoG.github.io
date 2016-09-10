@@ -32,7 +32,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img lazy-src="0" class="js-avatar">
+			<img lazy-src="null/img/bolgHeader.jpg" class="js-avatar">
 			
 		</a>
 
@@ -79,7 +79,7 @@
 						<li>Links</li>
 						
 						
-						<li>Über</li>
+						<li>About</li>
 						
 					</ul>
 				</div>
@@ -164,7 +164,7 @@
 		<header id="header" class="inner">
 			<div class="profilepic">
 				
-					<img lazy-src="0" class="js-avatar">
+					<img lazy-src="null/img/bolgHeader.jpg" class="js-avatar">
 				
 			</div>
 			<hgroup>
@@ -201,6 +201,250 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-自定义ListView,实现Header缩放" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/10/自定义ListView,实现Header缩放/" class="article-date">
+  	<time datetime="2016-09-10T09:55:20.156Z" itemprop="datePublished">2016-09-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/10/自定义ListView,实现Header缩放/">自定义ListView,实现Header缩放</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文章要实现的效果如图<br><img src="http://i.imgur.com/L9OwD6T.gif" alt=""></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>主要用到了 overScrollBy() onScrollChanged() onTouchEvent(),还有一个自定义动画</p>
+<h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>自定义ListView Header的布局，代码如下</p>
+<pre><code>&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;ImageView
+    android:id=&quot;@+id/imageView&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;@dimen/defaultHeight&quot;
+    android:src=&quot;@drawable/headerbackground&quot;
+    android:scaleType=&quot;centerCrop&quot;/&gt;
+
+&lt;ImageView
+    android:id=&quot;@+id/icon&quot;
+    android:layout_width=&quot;50dp&quot;
+    android:layout_height=&quot;50dp&quot;
+    android:layout_alignParentLeft=&quot;true&quot;
+    android:layout_alignParentBottom=&quot;true&quot;
+    android:layout_marginBottom=&quot;20dp&quot;
+    android:layout_marginLeft=&quot;40dp&quot;
+    android:src=&quot;@drawable/icon&quot; /&gt;
+&lt;/RelativeLayout&gt;
+</code></pre><h2 id="第二步实现自定义ListView"><a href="#第二步实现自定义ListView" class="headerlink" title="第二步实现自定义ListView"></a>第二步实现自定义ListView</h2><p>代码如下</p>
+<pre><code>public class MyListView extends ListView {
+
+    private int defaultHeight = 0;
+    private ImageView backImage;
+    private ImageView iconImage;
+    private int rotateAngle = 0;
+
+/*因为要在xml中定义，所以使用第二个构造函数*/
+public MyListView(Context context, AttributeSet attrs) {
+    super(context, attrs);
+    this.defaultHeight = (int) context.getResources().getDimension(R.dimen.defaultHeight);
+}
+
+/*设置ListView头部的背景图片*/
+public void setHeaderImageView(ImageView backImageView) {
+    this.backImage = backImageView;
+}
+
+public void setHeaderIcon(ImageView iconImageView) {
+    this.iconImage = iconImageView;
+}
+
+/**
+ * 监听ListView的滑动过度
+ *
+ * @param deltaX
+ * @param deltaY
+ * @param scrollX
+ * @param scrollY
+ * @param scrollRangeX
+ * @param scrollRangeY
+ * @param maxOverScrollX
+ * @param maxOverScrollY
+ * @param isTouchEvent
+ * @return
+ */
+@Override
+protected boolean overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int scrollRangeX, int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent) {
+
+//        deltaX deltaY 增量
+//        - ：代表下拉过度
+//        + ：代表上拉过度
+//        下拉的时候
+    if (deltaY &lt; 0) {
+        backImage.getLayoutParams().height = backImage.getHeight() - deltaY;
+        //          设置头像旋转
+        iconImage.setRotation(rotateAngle -= 10);
+        backImage.requestLayout();
+    } else {
+//            缩小
+        if (backImage.getHeight() &gt; defaultHeight) {
+            backImage.getLayoutParams().height = backImage.getHeight() - deltaY;
+            backImage.requestLayout();
+        }
+    }
+    return super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX, scrollRangeY, maxOverScrollX, maxOverScrollY, isTouchEvent);
+}
+
+/**
+ * 上滑时让图片恢复大小
+ *
+ * @param l
+ * @param t
+ * @param oldl
+ * @param oldt
+ */
+@Override
+protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+    /*获取父容器*/
+    View view = (View) backImage.getParent();
+
+    if (view.getTop() &lt; 0 &amp;&amp; backImage.getHeight() &gt; defaultHeight) {
+        backImage.getLayoutParams().height = backImage.getHeight() + view.getTop();
+        view.layout(view.getLeft(), 0, view.getRight(), 0);
+        backImage.requestLayout();
+    }
+    super.onScrollChanged(l, t, oldl, oldt);
+}
+
+/**
+ * 松手时恢复高度
+ *
+ * @param ev
+ * @return
+ */
+@Override
+public boolean onTouchEvent(MotionEvent ev) {
+    int action = ev.getAction();
+
+    if (action == MotionEvent.ACTION_UP) {
+        /*自定义动画恢复原来的高度*/
+        ResetAnimation resetAnimation = new ResetAnimation(backImage, defaultHeight);
+        resetAnimation.setDuration(1000);
+        backImage.startAnimation(resetAnimation);
+    }
+
+    return super.onTouchEvent(ev);
+}
+
+public class ResetAnimation extends Animation {
+    private final ImageView backImage;
+    private final int targetHeight;
+    private final int originalHeight;
+    private final int extraHeight;
+
+    public ResetAnimation(ImageView backImage, int targetHeight) {
+        this.backImage = backImage;
+        this.targetHeight = targetHeight;   //最终的高度
+        this.originalHeight = backImage.getHeight();    //现在的高度
+        this.extraHeight = originalHeight - targetHeight;   //高度差
+    }
+
+    @Override
+    protected void applyTransformation(float interpolatedTime, Transformation t) {
+        //interpolatedTime (0.0 - 1.0)执行的百分比
+        //减小ImageView的高度
+        //现在的高度减去高度差
+        backImage.getLayoutParams().height = (int) (originalHeight - extraHeight * interpolatedTime);
+        iconImage.setRotation(rotateAngle / interpolatedTime);
+        backImage.requestLayout();
+        super.applyTransformation(interpolatedTime, t);
+        }
+    }
+}
+</code></pre><h2 id="最后Activity如下"><a href="#最后Activity如下" class="headerlink" title="最后Activity如下"></a>最后Activity如下</h2><pre><code>    public class MainActivity extends AppCompatActivity {
+
+    private MyListView myListView;
+    private ImageView backImageView;
+    private ImageView iconImageView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        myListView = (MyListView) findViewById(R.id.listView);
+
+        /*渲染自定义view*/
+        View view = View.inflate(this, R.layout.listview_header, null);
+        /*获取自定义view里面的控件*/
+        backImageView = (ImageView) view.findViewById(R.id.imageView);
+        iconImageView = (ImageView) view.findViewById(R.id.icon);
+
+        /*模拟数据*/
+        ArrayAdapter&lt;String&gt; arrayAdapter = new ArrayAdapter&lt;String&gt;(this, android.R.layout.simple_list_item_1, new String[]{
+                &quot;星期一 写代码&quot;,
+                &quot;星期二 改bug&quot;,
+                &quot;星期三 改需求&quot;,
+                &quot;星期四 删代码&quot;,
+                &quot;星期五 写代码&quot;,
+                &quot;星期六 写代码&quot;,
+                &quot;星期日 可以休息了&quot;
+        });
+
+        /*自定义ListView设置header图片*/
+        myListView.addHeaderView(view);
+        /*设置Header背景图片*/
+        myListView.setHeaderImageView(backImageView);
+        /*设置头像*/
+        myListView.setHeaderIcon(iconImageView);
+        myListView.setAdapter(arrayAdapter);
+    }
+}
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Android/">Android</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-简单的天气APP" class="article article-type-post" itemscope itemprop="blogPost">
   
