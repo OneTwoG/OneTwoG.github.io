@@ -10,9 +10,7 @@
 程序整体分析
 主要有两个活动，一个用来选择查看天气的Activity，另一个用来显示所选的地方当前天气的Activity
 使用本地数据SQLite做数据本地化（主要存储地方的代号和名称）
-使用后台服务定时更新天气信息
-
-两个界面的XML选择查询天气地点的界面    &amp;lt;?xml version=”1.0” encoding=">
+使用后台服务定时更新天气信息">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简单的天气APP">
 <meta property="og:url" content="http://ytwnoone.xyz/2016/07/03/简单的天气APP/index.html">
@@ -21,20 +19,16 @@
 程序整体分析
 主要有两个活动，一个用来选择查看天气的Activity，另一个用来显示所选的地方当前天气的Activity
 使用本地数据SQLite做数据本地化（主要存储地方的代号和名称）
-使用后台服务定时更新天气信息
-
-两个界面的XML选择查询天气地点的界面    &amp;lt;?xml version=”1.0” encoding=">
+使用后台服务定时更新天气信息">
 <meta property="og:image" content="http://ytwnoone.xyz/img/weather.png">
-<meta property="og:updated_time" content="2016-07-03T13:43:56.250Z">
+<meta property="og:updated_time" content="2016-09-21T16:18:14.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单的天气APP">
 <meta name="twitter:description" content="学Android已经有一阵子了，通过这个项目实用一下自己学过的知识。
 程序整体分析
 主要有两个活动，一个用来选择查看天气的Activity，另一个用来显示所选的地方当前天气的Activity
 使用本地数据SQLite做数据本地化（主要存储地方的代号和名称）
-使用后台服务定时更新天气信息
-
-两个界面的XML选择查询天气地点的界面    &amp;lt;?xml version=”1.0” encoding=">
+使用后台服务定时更新天气信息">
 <meta name="twitter:image" content="http://ytwnoone.xyz/img/weather.png">
   
     <link rel="alternative" href="/atom.xml" title="会飞的僵尸" type="application/atom+xml">
@@ -137,7 +131,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/自定义控件/" style="font-size: 10px;">自定义控件</a>
 					</div>
 				</section>
 				
@@ -262,29 +256,20 @@
 <h3 id="程序整体分析"><a href="#程序整体分析" class="headerlink" title="程序整体分析"></a>程序整体分析</h3><ul>
 <li>主要有两个活动，一个用来选择查看天气的Activity，另一个用来显示所选的地方当前天气的Activity</li>
 <li>使用本地数据SQLite做数据本地化（主要存储地方的代号和名称）</li>
-<li>使用后台服务定时更新天气信息</li>
+<li><p>使用后台服务定时更新天气信息</p>
+<a id="more"></a>
+<h3 id="两个界面的XML"><a href="#两个界面的XML" class="headerlink" title="两个界面的XML"></a>两个界面的XML</h3><p>选择查询天气地点的界面<br>  &lt;?xml version=”1.0” encoding=”utf-8”?&gt;</p>
+  <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+
+  <relativelayout android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/colorPrimaryDark"><br><br>      <textview android:id="@+id/title_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerinparent="true" android:textcolor="#fff" android:textsize="24sp"><br>  </textview></relativelayout>
+
+<p>  &lt;ListView</p>
+<pre><code>android:id=&quot;@+id/lv_view&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;&lt;/ListView&gt;
+</code></pre><p>  </p></linearlayout><br>该界面简单比较简单，第一个TextView用于显示所选地方所属的区域。ListView用于显示这个区域下所有的子区域。<p></p>
+</li>
 </ul>
-<h3 id="两个界面的XML"><a href="#两个界面的XML" class="headerlink" title="两个界面的XML"></a>两个界面的XML</h3><p>选择查询天气地点的界面<br>    &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"></linearlayout></p>
-<pre><code>&lt;RelativeLayout
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;50dp&quot;
-    android:background=&quot;@color/colorPrimaryDark&quot;&gt;
-
-    &lt;TextView
-        android:id=&quot;@+id/title_text&quot;
-        android:layout_width=&quot;wrap_content&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:layout_centerInParent=&quot;true&quot;
-        android:textColor=&quot;#fff&quot;
-        android:textSize=&quot;24sp&quot;/&gt;
-&lt;/RelativeLayout&gt;
-
-&lt;ListView
-    android:id=&quot;@+id/lv_view&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;&gt;&lt;/ListView&gt;
-&lt;/LinearLayout&gt;
-</code></pre><p>该界面简单比较简单，第一个TextView用于显示所选地方所属的区域。ListView用于显示这个区域下所有的子区域。</p>
 <p>显示当前区域天气的XML<br>    &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"></linearlayout></p>
 <pre><code>&lt;RelativeLayout
     android:layout_width=&quot;match_parent&quot;

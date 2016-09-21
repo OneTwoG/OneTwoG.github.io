@@ -6,23 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Android中的设计模式1 | 会飞的僵尸</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="设计模式代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式已经成为开发人员最重要的技能之一，他们能够让你优雅的、简单、灵活的解决开发中遇到的设计难题，让你的软件系统具有更好的可扩展性、灵活性，在特定场景之下让你的软件系统实现拥抱变化。
-单例模式单例模式定义确保某一个类中只有一个实例，而且自行实例化并向整个系统提供这个实例。  
-模式使用场景确保某个类有且只有一个对象的场景，例如">
+  <meta name="description" content="设计模式代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式已经成为开发人员最重要的技能之一，他们能够让你优雅的、简单、灵活的解决开发中遇到的设计难题，让你的软件系统具有更好的可扩展性、灵活性，在特定场景之下让你的软件系统实现拥抱变化。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android中的设计模式1">
 <meta property="og:url" content="http://ytwnoone.xyz/2016/06/01/单例设计模式/index.html">
 <meta property="og:site_name" content="会飞的僵尸">
-<meta property="og:description" content="设计模式代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式已经成为开发人员最重要的技能之一，他们能够让你优雅的、简单、灵活的解决开发中遇到的设计难题，让你的软件系统具有更好的可扩展性、灵活性，在特定场景之下让你的软件系统实现拥抱变化。
-单例模式单例模式定义确保某一个类中只有一个实例，而且自行实例化并向整个系统提供这个实例。  
-模式使用场景确保某个类有且只有一个对象的场景，例如">
+<meta property="og:description" content="设计模式代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式已经成为开发人员最重要的技能之一，他们能够让你优雅的、简单、灵活的解决开发中遇到的设计难题，让你的软件系统具有更好的可扩展性、灵活性，在特定场景之下让你的软件系统实现拥抱变化。">
 <meta property="og:image" content="http://139.129.39.66/blog/danlimoshi.png">
-<meta property="og:updated_time" content="2016-06-08T15:58:55.805Z">
+<meta property="og:updated_time" content="2016-09-21T16:17:34.943Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android中的设计模式1">
-<meta name="twitter:description" content="设计模式代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式已经成为开发人员最重要的技能之一，他们能够让你优雅的、简单、灵活的解决开发中遇到的设计难题，让你的软件系统具有更好的可扩展性、灵活性，在特定场景之下让你的软件系统实现拥抱变化。
-单例模式单例模式定义确保某一个类中只有一个实例，而且自行实例化并向整个系统提供这个实例。  
-模式使用场景确保某个类有且只有一个对象的场景，例如">
+<meta name="twitter:description" content="设计模式代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式已经成为开发人员最重要的技能之一，他们能够让你优雅的、简单、灵活的解决开发中遇到的设计难题，让你的软件系统具有更好的可扩展性、灵活性，在特定场景之下让你的软件系统实现拥抱变化。">
 <meta name="twitter:image" content="http://139.129.39.66/blog/danlimoshi.png">
   
     <link rel="alternative" href="/atom.xml" title="会飞的僵尸" type="application/atom+xml">
@@ -125,7 +119,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/自定义控件/" style="font-size: 10px;">自定义控件</a>
 					</div>
 				</section>
 				
@@ -246,7 +240,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>设计模式代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式已经成为开发人员最重要的技能之一，他们能够让你优雅的、简单、灵活的解决开发中遇到的设计难题，让你的软件系统具有更好的可扩展性、灵活性，在特定场景之下让你的软件系统实现拥抱变化。</p>
+        <p>设计模式代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式已经成为开发人员最重要的技能之一，他们能够让你优雅的、简单、灵活的解决开发中遇到的设计难题，让你的软件系统具有更好的可扩展性、灵活性，在特定场景之下让你的软件系统实现拥抱变化。<br><a id="more"></a></p>
 <h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><h3 id="单例模式定义"><a href="#单例模式定义" class="headerlink" title="单例模式定义"></a>单例模式定义</h3><p>确保某一个类中只有一个实例，而且自行实例化并向整个系统提供这个实例。  </p>
 <h3 id="模式使用场景"><a href="#模式使用场景" class="headerlink" title="模式使用场景"></a>模式使用场景</h3><p>确保某个类有且只有一个对象的场景，例如创建一个对象需要消耗的资源过多，如要访问IO和数据库等资源。  </p>
 <h3 id="模式的简单实现"><a href="#模式的简单实现" class="headerlink" title="模式的简单实现"></a>模式的简单实现</h3><p>单例模式是设计模式中最简单的，只有一个单例类，没有其他的层次结构与抽象。该模式需要确保该类只能生成一个对象，通常是该类需要消耗太多的资源或者没有多个实例的理由。例如一个公司只有一个CEO,一台电脑电脑通常只有一个键盘等。下面我们以公司里的CEO为例来简单演示，一个公司可以有几个VP，无数个员工，但是CEO只有一个，请看下面实例。  </p>
